@@ -30,7 +30,8 @@ tar_make_archive <- function(
   script <- script_file(
     package = package,
     pipeline = pipeline,
-    script = script
+    script = script,
+    envir = envir
   )
   store <- store_dir(
     package = package,

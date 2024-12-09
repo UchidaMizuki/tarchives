@@ -1,7 +1,11 @@
-script_file <- function(package, pipeline, script) {
-  system.file("tarchives", pipeline, script,
-              package = package,
-              mustWork = TRUE)
+script_file <- function(package, pipeline, script, envir) {
+  rlang::eval_tidy(rlang::expr(system.file("tarchives", pipeline, script,
+                                           package = package,
+                                           mustWork = TRUE)),
+                   data = list(package = package,
+                               pipeline = pipeline,
+                               script = script),
+                   env = envir)
 }
 
 store_dir <- function(package, pipeline, store) {
