@@ -3,4 +3,6 @@
 export(tar_archive)
 export(tar_read_archive)
 export(tar_read_archive_raw)
+export(tar_target_archive)
+export(tar_target_archive_raw)
 importFrom(rlang,"%||%")
