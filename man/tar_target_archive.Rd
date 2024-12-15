@@ -296,8 +296,6 @@ functions like \code{\link[targets:tar_make]{tar_make()}}. For example,
 \code{tar_manifest(names = tar_described_as(starts_with("survival model")))}
 lists all the targets whose descriptions start with the character
 string \code{"survival model"}.}
-
-\item{f}{A function of targets package.}
 }
 \value{
 A target object. Users should not modify these directly,

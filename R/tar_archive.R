@@ -46,13 +46,19 @@ tar_archive <- function(
              identical(f, targets::tar_target_raw)) {
     tar_target_archive_impl(f, args,
                             package = package,
-                            pipeline = pipeline)
+                            pipeline = pipeline,
+                            envir = envir,
+                            script = script,
+                            store = store)
   } else {
     tar_archive_impl(f, args)
   }
 }
 
 tar_archive_impl <- function(f, args) {
+  fmls_names <- rlang::fn_fmls_names(f)
+  args <- args[names(args) %in% fmls_names]
+
   function(...) {
     rlang::exec(f, !!!args, ...)
   }

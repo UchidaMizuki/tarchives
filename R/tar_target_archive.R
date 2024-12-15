@@ -1,6 +1,5 @@
 #' Declare a target to read an archive.
 #'
-#' @param f A function of targets package.
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
 #' @param ... Arguments to pass to [targets::tar_make()] etc.
@@ -112,7 +111,7 @@ tar_target_archive_raw <- function(
   )
 }
 
-tar_target_archive_impl <- function(f, args, package, pipeline) {
+tar_target_archive_impl <- function(f, args, package, pipeline, envir, script, store) {
   tar_outdated_archive <- tar_archive(
     targets::tar_outdated,
     package = package,
@@ -123,38 +122,38 @@ tar_target_archive_impl <- function(f, args, package, pipeline) {
     if (name %in% tar_outdated_archive(names = name)) {
       cue$mode <- "always"
 
-      fmls_names_tar_make <- rlang::fn_fmls_names(targets::tar_make)
-      args_tar_make <- args[names(args) %in% fmls_names_tar_make]
-      rlang::exec(
-        tar_archive(
-          targets::tar_make,
-          package = package,
-          pipeline = pipeline
-        ),
+      tar_make_archive(
+        package = package,
+        pipeline = pipeline,
         names = name,
-        !!!args_tar_make
+        envir = envir,
+        script = script,
+        store = store,
+        !!!args
       )
     }
 
-    args_tar_target_raw <- rlang::list2(...)
+    args <- rlang::list2(...)
 
     fmls_names_tar_read_archive_raw <- rlang::fn_fmls_names(tar_read_archive_raw)
-    args_tar_read_archive_raw <- args_tar_target_raw[names(args_tar_target_raw) %in% fmls_names_tar_read_archive_raw]
+    args_tar_read_archive_raw <- args[names(args) %in% fmls_names_tar_read_archive_raw]
     command <- rlang::call2(
       "tar_read_archive_raw",
       name = name,
       package = package,
       pipeline = pipeline,
+      store = store,
       !!!args_tar_read_archive_raw
     )
 
-    args_tar_target_raw <- args_tar_target_raw[!names(args_tar_target_raw) %in% fmls_names_tar_read_archive_raw]
+    fmls_names <- rlang::fn_fmls_names(f)
+    args <- args[names(args) %in% fmls_names]
     rlang::exec(
-      targets::tar_target_raw,
+      f,
       name = name,
       command = command,
       cue = cue,
-      !!!args_tar_target_raw
+      !!!args
     )
   }
 }
