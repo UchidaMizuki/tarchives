@@ -5,10 +5,10 @@ Authors@R: c(
     person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-6534-6942"))
  )
-Description: Running the targets pipeline in /inst/tarchives stores the results 
-    of the execution in the R user directory. This means that the user does not 
-    have to run the process again, and the developer has the flexibility to 
-    update the data as versions are upgraded.
+Description: Runs 'targets' pipeline in /inst/tarchives and stores the results 
+    in the R user directory. This means that the user does not have to run the
+    process repeatedly, and the developer has the flexibility to update the data
+    as versions are updated.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
