@@ -4,8 +4,12 @@
 \name{tarchives-package}
 \alias{tarchives}
 \alias{tarchives-package}
-\title{tarchives: What the Package Does (Title Case)}
+\title{tarchives: Make Your 'targets' Pipelines into a Package}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+Running the targets pipeline in /inst/tarchives stores the results of the execution in the R user directory. This means that the user does not have to run the process again, and the developer has the flexibility to update the data as versions are upgraded.
+}
+\author{
+\strong{Maintainer}: Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID})
+
 }
 \keyword{internal}

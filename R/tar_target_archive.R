@@ -118,6 +118,7 @@ tar_target_archive_impl <- function(f, args, package, pipeline) {
     package = package,
     pipeline = pipeline
   )
+
   function(name, cue, ...) {
     if (name %in% tar_outdated_archive(names = name)) {
       cue$mode <- "always"

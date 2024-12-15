@@ -1,12 +1,15 @@
 Package: tarchives
-Type: Package
-Title: What the Package Does (Title Case)
+Title: Make Your 'targets' Pipelines into a Package
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+    person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0003-6534-6942"))
+ )
+Description: Running the targets pipeline in /inst/tarchives stores the results 
+    of the execution in the R user directory. This means that the user does not 
+    have to run the process again, and the developer has the flexibility to 
+    update the data as versions are upgraded.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
