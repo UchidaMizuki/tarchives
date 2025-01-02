@@ -64,7 +64,8 @@ tar_target_archive <- function(
 tar_target_archive_raw <- function(
     name,
     package,
-    pipeline, ...,
+    pipeline,
+    ...,
     pattern = NULL,
     packages = targets::tar_option_get("packages"),
     library = targets::tar_option_get("library"),
@@ -84,12 +85,40 @@ tar_target_archive_raw <- function(
     cue = targets::tar_option_get("cue"),
     description = targets::tar_option_get("description")
 ) {
-  tar_archive(
-    targets::tar_target_raw,
+  args <- rlang::list2(...)
+
+  outdated <- rlang::exec(
+    "tar_outdated_archive",
     package = package,
-    pipeline = pipeline
-  )(
+    pipeline = pipeline,
+    names = name,
+    !!!args[names(args) %in% rlang::fn_fmls_names(tar_outdated_archive)],
+  )
+
+  if (name %in% outdated) {
+    cue$mode <- "always"
+
+    rlang::exec(
+      tar_make_archive,
+      package = package,
+      pipeline = pipeline,
+      names = {{ name }},
+      !!!args[names(args) %in% rlang::fn_fmls_names(tar_make_archive)]
+    )
+  }
+
+  command <- rlang::call2(
+    "tar_read_archive_raw",
     name = name,
+    package = package,
+    pipeline = pipeline,
+    !!!args[names(args) %in% rlang::fn_fmls_names(tar_read_archive_raw)],
+    .ns = "tarchives"
+  )
+
+  targets::tar_target_raw(
+    name = name,
+    command = command,
     pattern = pattern,
     packages = packages,
     library = library,
@@ -109,51 +138,4 @@ tar_target_archive_raw <- function(
     cue = cue,
     description = description
   )
-}
-
-tar_target_archive_impl <- function(f, args, package, pipeline, envir, script, store) {
-  tar_outdated_archive <- tar_archive(
-    targets::tar_outdated,
-    package = package,
-    pipeline = pipeline
-  )
-
-  function(name, cue, ...) {
-    if (name %in% tar_outdated_archive(names = name)) {
-      cue$mode <- "always"
-
-      tar_make_archive(
-        package = package,
-        pipeline = pipeline,
-        names = name,
-        envir = envir,
-        script = script,
-        store = store,
-        !!!args
-      )
-    }
-
-    args <- rlang::list2(...)
-
-    fmls_names_tar_read_archive_raw <- rlang::fn_fmls_names(tar_read_archive_raw)
-    args_tar_read_archive_raw <- args[names(args) %in% fmls_names_tar_read_archive_raw]
-    command <- rlang::call2(
-      "tar_read_archive_raw",
-      name = name,
-      package = package,
-      pipeline = pipeline,
-      store = store,
-      !!!args_tar_read_archive_raw
-    )
-
-    fmls_names <- rlang::fn_fmls_names(f)
-    args <- args[names(args) %in% fmls_names]
-    rlang::exec(
-      f,
-      name = name,
-      command = command,
-      cue = cue,
-      !!!args
-    )
-  }
 }

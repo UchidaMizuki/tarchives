@@ -38,24 +38,19 @@ tar_read_archive_raw <- function(
     meta = NULL,
     store = targets::tar_config_get("store")
 ) {
-  tar_archive(
-    targets::tar_read_raw,
+  store <- tar_archive_store(
     package = package,
     pipeline = pipeline,
     store = store
-  )(
+  )
+  meta <- meta %||% targets::tar_meta(
+    store = store
+  )
+
+  targets::tar_read_raw(
     name = name,
     branches = branches,
-    meta = meta
+    meta = meta,
+    store = store
   )
-}
-
-tar_read_archive_impl <- function(f, args) {
-  function(meta, ...) {
-    meta <- meta %||% targets::tar_meta(
-      store = args$store
-    )
-    rlang::exec(f, !!!args,
-                meta = meta, ...)
-  }
 }
