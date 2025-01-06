@@ -38,6 +38,7 @@ tar_make_archive <- function(
     pipeline = pipeline,
     store = store
   )
+
   targets::tar_make(
     names = {{ names }},
     shortcut = shortcut,
