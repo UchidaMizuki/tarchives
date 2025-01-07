@@ -55,8 +55,6 @@ is temporarily changed for the current function call.
 See \code{\link[targets:tar_config_get]{tar_config_get()}} and \code{\link[targets:tar_config_set]{tar_config_set()}} for details
 about how to set the data store path persistently
 for a project.}
-
-\item{...}{Arguments to pass to \code{\link[targets:tar_make]{targets::tar_make()}} etc.}
 }
 \value{
 A function.

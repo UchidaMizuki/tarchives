@@ -54,7 +54,6 @@ tar_archive_store <- function(
 #' @param f A function of targets package.
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
-#' @param ... Arguments to pass to [targets::tar_make()] etc.
 #' @inheritParams targets::tar_make
 #'
 #' @return A function.
@@ -68,13 +67,13 @@ tar_archive <- function(
     script = targets::tar_config_get("script"),
     store = targets::tar_config_get("store")
 ) {
-  fmls <- rlang::fn_fmls(f)
+  fmls_names <- rlang::fn_fmls_names(f)
 
   args <- list()
-  if ("envir" %in% names(fmls)) {
+  if ("envir" %in% fmls_names) {
     args$envir <- envir
   }
-  if ("script" %in% names(fmls)) {
+  if ("script" %in% fmls_names) {
     args$script <- tar_archive_script(
       package = package,
       pipeline = pipeline,
@@ -82,7 +81,7 @@ tar_archive <- function(
       envir = envir
     )
   }
-  if ("store" %in% names(fmls)) {
+  if ("store" %in% fmls_names) {
     args$store <- tar_archive_store(
       package = package,
       pipeline = pipeline,
@@ -97,7 +96,6 @@ tar_archive <- function(
         !!!args,
         !!!rlang::enexprs(...)
       ),
-      data = as.list(fmls),
       env = envir
     )
   }
