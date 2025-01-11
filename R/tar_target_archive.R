@@ -87,23 +87,30 @@ tar_target_archive_raw <- function(
 ) {
   args <- rlang::list2(...)
 
+  tar_outdated_archive <- tar_archive(
+    targets::tar_outdated,
+    package = package,
+    pipeline = pipeline
+  )
   outdated <- rlang::exec(
     "tar_outdated_archive",
-    package = package,
-    pipeline = pipeline,
     names = name,
-    !!!args[names(args) %in% rlang::fn_fmls_names(tar_outdated_archive)],
+    !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
   )
-
   if (name %in% outdated) {
     cue$mode <- "always"
 
+    tar_make_archive <- tar_archive(
+      targets::tar_make,
+      package = package,
+      pipeline = pipeline
+    )
     rlang::exec(
-      tar_make_archive,
+      "tar_make_archive",
       package = package,
       pipeline = pipeline,
       names = {{ name }},
-      !!!args[names(args) %in% rlang::fn_fmls_names(tar_make_archive)]
+      !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_make)]
     )
   }
 
