@@ -1,3 +1,18 @@
+with_dir_archive <- function(
+    package,
+    pipeline,
+    code
+) {
+  withr::with_dir(
+    system.file(
+      "tarchives", pipeline,
+      package = package,
+      mustWork = TRUE
+    ),
+    code
+  )
+}
+
 #' Path to the archived target script file
 #'
 #' @param package A scalar character of the package name.
@@ -10,19 +25,13 @@
 tar_archive_script <- function(
     package,
     pipeline,
-    envir = parent.frame(),
     script = targets::tar_config_get("script")
 ) {
-  script <- rlang::eval_tidy(
-    rlang::call2(
-      "system.file",
-      "tarchives", pipeline, script,
-      package = package,
-      mustWork = TRUE
-    ),
-    env = envir
+  with_dir_archive(
+    package = package,
+    pipeline = pipeline,
+    fs::path_wd(script)
   )
-  fs::as_fs_path(script)
 }
 
 #' Path to the archived target store directory
@@ -77,8 +86,7 @@ tar_archive <- function(
     args$script <- tar_archive_script(
       package = package,
       pipeline = pipeline,
-      script = script,
-      envir = envir
+      script = script
     )
   }
   if ("store" %in% fmls_names) {
@@ -88,15 +96,18 @@ tar_archive <- function(
       store = store
     )
   }
-
   function(...) {
-    rlang::eval_tidy(
-      rlang::call2(
-        f,
-        !!!args,
-        !!!rlang::enexprs(...)
-      ),
-      env = envir
+    with_dir_archive(
+      package = package,
+      pipeline = pipeline,
+      rlang::eval_tidy(
+        rlang::call2(
+          f,
+          !!!args,
+          !!!rlang::enexprs(...)
+        ),
+        env = envir
+      )
     )
   }
 }

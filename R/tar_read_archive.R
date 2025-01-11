@@ -16,7 +16,6 @@ tar_read_archive <- function(
     store = targets::tar_config_get("store")
 ) {
   name <- targets::tar_deparse_language(substitute(name))
-
   tar_read_archive_raw(
     name = name,
     package = package,
@@ -46,7 +45,6 @@ tar_read_archive_raw <- function(
   meta <- meta %||% targets::tar_meta(
     store = store
   )
-
   targets::tar_read_raw(
     name = name,
     branches = branches,

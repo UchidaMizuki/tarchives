@@ -46,27 +46,8 @@ are up to date, so please use with caution.
 It relies on stored metadata for information about upstream dependencies.
 \code{shortcut = TRUE} only works if you set \code{names}.}
 
-\item{reporter}{Character of length 1, name of the reporter to user.
-Controls how messages are printed as targets run in the pipeline.
-Defaults to \code{tar_config_get("reporter_make")}. Choices:
-\itemize{
-\item \code{"silent"}: print nothing.
-\item \code{"summary"}: print a running total of the number of each targets in
-each status category (queued, dispatched, skipped, completed, canceled,
-or errored). Also show a timestamp (\code{"\%H:\%M \%OS2"} \code{strptime()} format)
-of the last time the progress changed and printed to the screen.
-\item \code{"timestamp"}: same as the \code{"verbose"} reporter except that each
-.message begins with a time stamp.
-\item \code{"timestamp_positives"}: same as the \code{"timestamp"} reporter
-except without messages for skipped targets.
-\item \code{"verbose"}: print messages for individual targets
-as they start, finish, or are skipped. Each individual
-target-specific time (e.g. "3.487 seconds") is strictly the
-elapsed runtime of the target and does not include
-steps like data retrieval and output storage.
-\item \code{"verbose_positives"}: same as the \code{"verbose"} reporter
-except without messages for skipped targets.
-}}
+\item{reporter}{A scalar character of the reporter type. By default,
+\code{"silent"}. See \code{\link[targets:tar_make]{targets::tar_make()}} for more options.}
 
 \item{seconds_meta_append}{Positive numeric of length 1 with the minimum
 number of seconds between saves to the local metadata and progress files

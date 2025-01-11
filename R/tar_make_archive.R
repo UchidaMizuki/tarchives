@@ -2,6 +2,8 @@
 #'
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
+#' @param reporter A scalar character of the reporter type. By default,
+#' `"silent"`. See [targets::tar_make()] for more options.
 #' @inheritParams targets::tar_make
 #'
 #' @inherit targets::tar_make return
@@ -30,31 +32,33 @@ tar_make_archive <- function(
   script <- tar_archive_script(
     package = package,
     pipeline = pipeline,
-    script = script,
-    envir = envir
+    script = script
   )
   store <- tar_archive_store(
     package = package,
     pipeline = pipeline,
     store = store
   )
-
-  targets::tar_make(
-    names = {{ names }},
-    shortcut = shortcut,
-    reporter = reporter,
-    seconds_meta_append = seconds_meta_append,
-    seconds_meta_upload = seconds_meta_upload,
-    seconds_reporter = seconds_reporter,
-    seconds_interval = seconds_interval,
-    callr_function = callr_function,
-    callr_arguments = callr_arguments,
-    envir = envir,
-    script = script,
-    store = store,
-    garbage_collection = garbage_collection,
-    use_crew = use_crew,
-    terminate_controller = terminate_controller,
-    as_job = as_job
+  with_dir_archive(
+    package = package,
+    pipeline = pipeline,
+    targets::tar_make(
+      names = {{ names }},
+      shortcut = shortcut,
+      reporter = reporter,
+      seconds_meta_append = seconds_meta_append,
+      seconds_meta_upload = seconds_meta_upload,
+      seconds_reporter = seconds_reporter,
+      seconds_interval = seconds_interval,
+      callr_function = callr_function,
+      callr_arguments = callr_arguments,
+      envir = envir,
+      script = script,
+      store = store,
+      garbage_collection = garbage_collection,
+      use_crew = use_crew,
+      terminate_controller = terminate_controller,
+      as_job = as_job
+    )
   )
 }
