@@ -7,7 +7,7 @@ targets::tar_test("tar_make_archive() works", {
   )
   expect_error(
     tar_make_archive(
-      package = "tarchives.wrong",
+      package = "tarchives-wrong",
       pipeline = "example-model"
     )
   )

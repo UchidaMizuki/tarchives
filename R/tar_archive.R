@@ -50,8 +50,10 @@ tar_archive_store <- function(
     store = targets::tar_config_get("store")
 ) {
   fs::path(
-    tools::R_user_dir("tarchives",
-                      which = "cache"),
+    tools::R_user_dir(
+      "tarchives",
+      which = "cache"
+    ),
     package,
     pipeline,
     store
