@@ -74,21 +74,12 @@ When the pipeline ends,
 all the metadata and progress data is uploaded immediately,
 regardless of \code{seconds_meta_upload}.}
 
-\item{seconds_reporter}{Positive numeric of length 1 with the minimum
-number of seconds between times when the reporter prints progress
-messages to the R console.
-This is an aggressive optimization setting not recommended
-for most users: higher values might make some pipelines run faster,
-but it becomes less clear which targets are actually running
-at any given moment.
-When the pipeline is just skipping targets,
-the actual interval between messages is \code{max(1, seconds_reporter)}
-to reduce overhead.}
+\item{seconds_reporter}{Deprecated on 2025-03-31
+(\code{targets} version 1.10.1.9010).}
 
 \item{seconds_interval}{Deprecated on 2023-08-24
 (targets version 1.2.2.9001).
-Use \code{seconds_meta_append}, \code{seconds_meta_upload},
-and \code{seconds_reporter} instead.}
+Use \code{seconds_meta_append} and \code{seconds_meta_upload} instead.}
 
 \item{callr_function}{A function from \code{callr} to start a fresh clean R
 process to do the work. Set to \code{NULL} to run in the current session

@@ -1,11 +1,12 @@
 with_dir_archive <- function(
-    package,
-    pipeline,
-    code
+  package,
+  pipeline,
+  code
 ) {
   withr::with_dir(
     system.file(
-      "tarchives", pipeline,
+      "tarchives",
+      pipeline,
       package = package,
       mustWork = TRUE
     ),
@@ -23,9 +24,9 @@ with_dir_archive <- function(
 #'
 #' @export
 tar_archive_script <- function(
-    package,
-    pipeline,
-    script = targets::tar_config_get("script")
+  package,
+  pipeline,
+  script = targets::tar_config_get("script")
 ) {
   with_dir_archive(
     package = package,
@@ -45,9 +46,9 @@ tar_archive_script <- function(
 #'
 #' @export
 tar_archive_store <- function(
-    package,
-    pipeline,
-    store = targets::tar_config_get("store")
+  package,
+  pipeline,
+  store = targets::tar_config_get("store")
 ) {
   fs::path(
     tools::R_user_dir(
@@ -71,12 +72,12 @@ tar_archive_store <- function(
 #'
 #' @export
 tar_archive <- function(
-    f,
-    package,
-    pipeline,
-    envir = parent.frame(),
-    script = targets::tar_config_get("script"),
-    store = targets::tar_config_get("store")
+  f,
+  package,
+  pipeline,
+  envir = parent.frame(),
+  script = targets::tar_config_get("script"),
+  store = targets::tar_config_get("store")
 ) {
   fmls_names <- rlang::fn_fmls_names(f)
 
