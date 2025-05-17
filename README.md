@@ -27,8 +27,7 @@ pak::pak("UchidaMizuki/tarchives")
 
 ## Functions
 
-- `tar_archive()`: Convert the targets function to the tarchives
-  version.
+- `tar_archive()`: Convert the targets function to tarchives version.
 - `tar_make_archive()`: tarchives version of `targets::tar_make()`
   function.
 - `tar_read_archive()`: tarchives version of `targets::tar_read()`
