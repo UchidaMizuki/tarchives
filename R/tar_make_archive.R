@@ -10,24 +10,24 @@
 #'
 #' @export
 tar_make_archive <- function(
-    package,
-    pipeline,
-    names = NULL,
-    shortcut = targets::tar_config_get("shortcut"),
-    reporter = "silent",
-    seconds_meta_append = targets::tar_config_get("seconds_meta_append"),
-    seconds_meta_upload = targets::tar_config_get("seconds_meta_upload"),
-    seconds_reporter = targets::tar_config_get("seconds_reporter"),
-    seconds_interval = targets::tar_config_get("seconds_interval"),
-    callr_function = callr::r,
-    callr_arguments = targets::tar_callr_args_default(callr_function, reporter),
-    envir = parent.frame(),
-    script = targets::tar_config_get("script"),
-    store = targets::tar_config_get("store"),
-    garbage_collection = NULL,
-    use_crew = targets::tar_config_get("use_crew"),
-    terminate_controller = TRUE,
-    as_job = targets::tar_config_get("as_job")
+  package,
+  pipeline,
+  names = NULL,
+  shortcut = targets::tar_config_get("shortcut"),
+  reporter = "silent",
+  seconds_meta_append = targets::tar_config_get("seconds_meta_append"),
+  seconds_meta_upload = targets::tar_config_get("seconds_meta_upload"),
+  seconds_reporter = targets::tar_config_get("seconds_reporter"),
+  seconds_interval = targets::tar_config_get("seconds_interval"),
+  callr_function = callr::r,
+  callr_arguments = targets::tar_callr_args_default(callr_function, reporter),
+  envir = parent.frame(),
+  script = targets::tar_config_get("script"),
+  store = targets::tar_config_get("store"),
+  garbage_collection = NULL,
+  use_crew = targets::tar_config_get("use_crew"),
+  terminate_controller = TRUE,
+  as_job = targets::tar_config_get("as_job")
 ) {
   script <- tar_archive_script(
     package = package,
@@ -42,6 +42,7 @@ tar_make_archive <- function(
   with_dir_archive(
     package = package,
     pipeline = pipeline,
+    envir = envir,
     targets::tar_make(
       names = {{ names }},
       shortcut = shortcut,

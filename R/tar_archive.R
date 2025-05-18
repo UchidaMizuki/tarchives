@@ -1,14 +1,19 @@
 with_dir_archive <- function(
   package,
   pipeline,
+  envir,
   code
 ) {
   withr::with_dir(
-    system.file(
-      "tarchives",
-      pipeline,
-      package = package,
-      mustWork = TRUE
+    rlang::eval_bare(
+      rlang::call2(
+        "system.file",
+        "tarchives",
+        pipeline,
+        package = package,
+        mustWork = TRUE
+      ),
+      env = envir
     ),
     code
   )
@@ -26,11 +31,13 @@ with_dir_archive <- function(
 tar_archive_script <- function(
   package,
   pipeline,
+  envir = parent.frame(),
   script = targets::tar_config_get("script")
 ) {
   with_dir_archive(
     package = package,
     pipeline = pipeline,
+    envir = envir,
     fs::path_wd(script)
   )
 }
@@ -103,12 +110,14 @@ tar_archive <- function(
     with_dir_archive(
       package = package,
       pipeline = pipeline,
+      envir = envir,
       rlang::eval_tidy(
         rlang::call2(
-          f,
+          "f",
           !!!args,
           !!!rlang::enexprs(...)
         ),
+        data = list(f = f),
         env = envir
       )
     )

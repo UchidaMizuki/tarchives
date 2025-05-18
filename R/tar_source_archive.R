@@ -7,13 +7,14 @@
 #'
 #' @export
 tar_source_archive <- function(
-    package,
-    files = "R",
-    envir = targets::tar_option_get("envir"),
-    change_directory = FALSE
+  package,
+  files = "R",
+  envir = targets::tar_option_get("envir"),
+  change_directory = FALSE
 ) {
   files <- system.file(
-    "tarchives", files,
+    "tarchives",
+    files,
     package = package,
     mustWork = TRUE
   )
