@@ -18,6 +18,7 @@ Imports:
     fs,
     rlang,
     targets,
+    usethis,
     withr
 Suggests: 
     testthat (>= 3.0.0)
