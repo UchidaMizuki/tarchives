@@ -5,7 +5,16 @@ with_dir_archive <- function(
   code
 ) {
   withr::with_dir(
-    system.file("tarchives", pipeline, package = package, mustWork = TRUE),
+    rlang::eval_bare(
+      rlang::call2(
+        "system.file",
+        "tarchives",
+        pipeline,
+        package = package,
+        mustWork = TRUE
+      ),
+      env = envir
+    ),
     code
   )
 }
