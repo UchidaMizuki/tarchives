@@ -6,7 +6,7 @@
 \alias{tarchives-package}
 \title{tarchives: Make Your 'targets' Pipelines into a Package}
 \description{
-Runs 'targets' pipeline in /inst/tarchives and stores the results in the R user directory. This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.
+Runs 'targets' pipeline in '/inst/tarchives' and stores the results in the R user directory. This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.
 }
 \author{
 \strong{Maintainer}: Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID})
