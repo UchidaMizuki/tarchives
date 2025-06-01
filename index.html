@@ -60,28 +60,100 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of tarchives is to make targets pipelines into a package. It runs ‘targets’ pipeline in /inst/tarchives and stores the results in the R user directory. This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>The goal of tarchives is to make targets pipelines into a package. It runs targets pipeline in /inst/tarchives and stores the results in the R user directory. This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.</p>
+<p>This package is a wrapper for the targets package and contains the following functions:</p>
+<ul>
+<li>
+<code><a href="reference/tar_archive.html">tar_archive()</a></code>: Convert the targets function to tarchives version</li>
+<li>
+<code><a href="reference/tar_make_archive.html">tar_make_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_make.html" class="external-link">targets::tar_make()</a></code> function</li>
+<li>
+<code><a href="reference/tar_read_archive.html">tar_read_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_read.html" class="external-link">targets::tar_read()</a></code> function</li>
+<li>
+<code><a href="reference/tar_target_archive.html">tar_target_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">targets::tar_target()</a></code> function</li>
+</ul>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of tarchives from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tarchives"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="development-version">Development version<a class="anchor" aria-label="anchor" href="#development-version"></a>
+</h3>
+<p>You can install the development version of tarchives from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"UchidaMizuki/tarchives"</span><span class="op">)</span></span></code></pre></div>
 </div>
+</div>
 <div class="section level2">
-<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<ul>
-<li>
-<code><a href="reference/tar_archive.html">tar_archive()</a></code>: Convert the targets function to tarchives version.</li>
-<li>
-<code><a href="reference/tar_make_archive.html">tar_make_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_make.html" class="external-link">targets::tar_make()</a></code> function.</li>
-<li>
-<code><a href="reference/tar_read_archive.html">tar_read_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_read.html" class="external-link">targets::tar_read()</a></code> function.</li>
-<li>
-<code><a href="reference/tar_target_archive.html">tar_target_archive()</a></code>: tarchives version of <code><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">targets::tar_target()</a></code> function.</li>
-</ul>
+<p>To use tarchives, run the following code under the package you are developing:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tarchives</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/use_tarchives.html">use_tarchives</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>This will create an <code>inst/tarchives</code> directory in your package, where your target pipelines will be stored. You can define your target pipeline in the <code>_targets.R</code> file in the <code>inst/tarchives/example-model</code> directory as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># inst/tarchives/example-model/_targets.R</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/" class="external-link">targets</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">tar_target</a></span><span class="op">(</span></span>
+<span>    <span class="va">data</span>,</span>
+<span>    <span class="va">iris</span><span class="op">[</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span> <span class="op">!=</span> <span class="st">"setosa"</span>, <span class="op">]</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">tar_target</a></span><span class="op">(</span></span>
+<span>    <span class="va">model</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Sepal.Length</span>, <span class="va">data</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>If you have created a package called <code>your-package</code> and saved the pipeline to a directory called <code>example-model</code> in the <code>inst/tarchives</code> directory, you can run it using the following command:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tar_make_archive.html">tar_make_archive</a></span><span class="op">(</span></span>
+<span>  package <span class="op">=</span> <span class="st">"your-package"</span>,</span>
+<span>  pipeline <span class="op">=</span> <span class="st">"example-model"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Then you can read the results using the <code><a href="reference/tar_read_archive.html">tar_read_archive()</a></code> function:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tar_read_archive.html">tar_read_archive</a></span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"your-package"</span>,</span>
+<span>  pipeline <span class="op">=</span> <span class="st">"your-pipeline"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; lm(formula = Sepal.Width ~ Sepal.Length, data = data)</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;  (Intercept)  Sepal.Length  </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;        1.131         0.278</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="declare-a-target-from-another-pipeline">Declare a target from another pipeline<a class="anchor" aria-label="anchor" href="#declare-a-target-from-another-pipeline"></a>
+</h3>
+<p>You can also declare a target from another pipeline using the <code><a href="reference/tar_target_archive.html">tar_target_archive()</a></code> function. For example, if you want to declare the <code>data</code> and <code>model</code> targets from the <code>example-model</code> pipeline in your <code>_targets.R</code> file, you can do it as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/" class="external-link">targets</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html" class="external-link">tar_source</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tarchives</span><span class="fu">::</span><span class="fu"><a href="reference/tar_target_archive.html">tar_target_archive</a></span><span class="op">(</span></span>
+<span>    <span class="va">data</span>,</span>
+<span>    package <span class="op">=</span> <span class="st">"tarchives"</span>,</span>
+<span>    pipeline <span class="op">=</span> <span class="st">"example-model"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  <span class="fu">tarchives</span><span class="fu">::</span><span class="fu"><a href="reference/tar_target_archive.html">tar_target_archive</a></span><span class="op">(</span></span>
+<span>    <span class="va">model</span>,</span>
+<span>    package <span class="op">=</span> <span class="st">"tarchives"</span>,</span>
+<span>    pipeline <span class="op">=</span> <span class="st">"example-model"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </div>
@@ -115,6 +187,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=tarchives" class="external-link"><img src="https://www.r-pkg.org/badges/version/tarchives" alt="CRAN status"></a></li>
+<li><a href="https://wlandau.github.io/targetopia/" class="external-link"><img src="https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&amp;labelColor=gray" alt="R Targetopia"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>

@@ -81,7 +81,7 @@ functions always overrides
 the current value of <code>tar_option_get("envir")</code> in the current R session
 just before running the target script file,
 so whenever you need to set an alternative <code>envir</code>, you should always set
-it with <code>tar_option_set()</code> from within the target script file.
+it with <code><a href="https://docs.ropensci.org/targets/reference/tar_option_set.html" class="external-link">tar_option_set()</a></code> from within the target script file.
 In other words, if you call <code>tar_option_set(envir = envir1)</code> in an
 interactive session and then
 <code>tar_make(envir = envir2, callr_function = NULL)</code>,
