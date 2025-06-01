@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tarchives)](https://CRAN.R-project.org/package=tarchives)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
