@@ -1,0 +1,18 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/tar_archive.html</loc></url>
+<url><loc>/reference/tar_archive_script.html</loc></url>
+<url><loc>/reference/tar_archive_store.html</loc></url>
+<url><loc>/reference/tar_make_archive.html</loc></url>
+<url><loc>/reference/tar_read_archive.html</loc></url>
+<url><loc>/reference/tar_source_archive.html</loc></url>
+<url><loc>/reference/tar_target_archive.html</loc></url>
+<url><loc>/reference/tarchives-package.html</loc></url>
+<url><loc>/reference/use_tarchives.html</loc></url>
+</urlset>
+
