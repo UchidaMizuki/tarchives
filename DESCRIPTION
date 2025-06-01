@@ -5,7 +5,7 @@ Authors@R: c(
     person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-6534-6942"))
  )
-Description: Runs 'targets' pipeline in /inst/tarchives and stores the results 
+Description: Runs 'targets' pipeline in '/inst/tarchives' and stores the results 
     in the R user directory. This means that the user does not have to run the
     process repeatedly, and the developer has the flexibility to update the data
     as versions are updated.
