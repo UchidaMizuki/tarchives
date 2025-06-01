@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UchidaMizuki/tarchives/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tarchives)](https://CRAN.R-project.org/package=tarchives)
+[![Codecov test
+coverage](https://codecov.io/gh/UchidaMizuki/tarchives/graph/badge.svg)](https://app.codecov.io/gh/UchidaMizuki/tarchives)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
 [![Lifecycle:
