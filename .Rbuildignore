@@ -5,3 +5,4 @@
 ^inst/tarchives/.*/_targets$
 ^[\.]?air\.toml$
 ^\.vscode$
+^\.github$
