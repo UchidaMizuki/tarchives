@@ -2,7 +2,9 @@
 #'
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
-#' @param ... Arguments to pass to [targets::tar_make()] etc.
+#' @param name_archive A scalar character of a name of archived target.
+#' If `NULL`, the name of the target is used. By default, `NULL`.
+#' @param ... Arguments to pass to [targets::tar_outdated], [targets::tar_make] or [tar_read_archive_raw].
 #' @inheritParams targets::tar_target
 #'
 #' @inherit targets::tar_target return
@@ -12,6 +14,7 @@ tar_target_archive <- function(
   name,
   package,
   pipeline,
+  name_archive = NULL,
   ...,
   pattern = NULL,
   packages = targets::tar_option_get("packages"),
@@ -33,10 +36,13 @@ tar_target_archive <- function(
   description = targets::tar_option_get("description")
 ) {
   name <- targets::tar_deparse_language(substitute(name))
+  name_archive <- targets::tar_deparse_language(substitute(name_archive)) %||%
+    name
   tar_target_archive_raw(
     name = name,
     package = package,
     pipeline = pipeline,
+    name_archive = name_archive,
     ...,
     pattern = pattern,
     packages = packages,
@@ -66,6 +72,7 @@ tar_target_archive_raw <- function(
   name,
   package,
   pipeline,
+  name_archive = name,
   ...,
   pattern = NULL,
   packages = targets::tar_option_get("packages"),
@@ -95,7 +102,7 @@ tar_target_archive_raw <- function(
   )
   outdated <- rlang::exec(
     tar_outdated_archive,
-    names = name,
+    names = name_archive,
     !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
   )
   if (name %in% outdated) {
@@ -105,14 +112,14 @@ tar_target_archive_raw <- function(
       tarchives::tar_make_archive,
       package = package,
       pipeline = pipeline,
-      names = name,
+      names = name_archive,
       !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_make)]
     )
   }
 
   command <- rlang::call2(
     "tar_read_archive_raw",
-    name = name,
+    name = name_archive,
     package = package,
     pipeline = pipeline,
     !!!args[names(args) %in% rlang::fn_fmls_names(tar_read_archive_raw)],
