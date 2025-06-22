@@ -9,6 +9,7 @@ tar_target_archive(
   name,
   package,
   pipeline,
+  name_archive = NULL,
   ...,
   pattern = NULL,
   packages = targets::tar_option_get("packages"),
@@ -34,6 +35,7 @@ tar_target_archive_raw(
   name,
   package,
   pipeline,
+  name_archive = name,
   ...,
   pattern = NULL,
   packages = targets::tar_option_get("packages"),
@@ -89,7 +91,10 @@ on the result to locally recreate the target's initial RNG state.}
 
 \item{pipeline}{A scalar character of the pipeline name.}
 
-\item{...}{Arguments to pass to \code{\link[targets:tar_make]{targets::tar_make()}} etc.}
+\item{name_archive}{A scalar character of a name of archived target.
+If \code{NULL}, the name of the target is used. By default, \code{NULL}.}
+
+\item{...}{Arguments to pass to \link[targets:tar_outdated]{targets::tar_outdated}, \link[targets:tar_make]{targets::tar_make} or \link{tar_read_archive_raw}.}
 
 \item{pattern}{Code to define a dynamic branching branching for a target.
 In \code{\link[targets:tar_target]{tar_target()}}, \code{pattern} is an unevaluated expression, e.g.
