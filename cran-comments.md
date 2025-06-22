@@ -1,5 +1,6 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* This is a new release.
+* This is a patch release to address the CRAN Package Check errors.
+* Now tests do not save Rplots.pdf under non-interactive R sessions.

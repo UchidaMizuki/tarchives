@@ -1,6 +1,6 @@
 Package: tarchives
 Title: Make Your 'targets' Pipelines into a Package
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-6534-6942"))
