@@ -26,3 +26,5 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 4.0.0)
 Roxygen: list(markdown = TRUE)
+URL: https://github.com/UchidaMizuki/tarchives
+BugReports: https://github.com/UchidaMizuki/tarchives/issues
