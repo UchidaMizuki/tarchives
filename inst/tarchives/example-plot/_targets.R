@@ -16,7 +16,7 @@ list(
   tar_target(
     plot,
     get_plot(
-      data = data, 
+      data = data,
       model = model
     )
   )

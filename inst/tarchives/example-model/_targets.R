@@ -1,9 +1,11 @@
 library(targets)
 
+tarchives::tar_source_archive("tarchives")
+
 list(
   tar_target(
     data,
-    iris[iris$Species != "setosa", ]
+    drop_setosa(iris)
   ),
   tar_target(
     model,
