@@ -1,5 +1,6 @@
 # tarchives 0.1.2
 
+* The archive functions now validate their `package` and `pipeline` arguments and report a clear error when the package or pipeline cannot be found.
 * tarchives no longer depends on usethis.
 * Tests no longer leave files in the user cache directory (`tools::R_user_dir("tarchives", "cache")`) during `R CMD check`, which caused the package to be archived on CRAN.
 

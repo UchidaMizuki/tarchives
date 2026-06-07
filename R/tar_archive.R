@@ -2,21 +2,37 @@ with_dir_archive <- function(
   package,
   pipeline,
   envir,
-  code
+  code,
+  call = caller_env()
 ) {
   withr::with_dir(
-    rlang::eval_bare(
-      rlang::call2(
-        "system.file",
-        "tarchives",
-        pipeline,
-        package = package,
-        mustWork = TRUE
-      ),
-      env = envir
-    ),
+    archive_system_file(pipeline, package = package, call = call),
     code
   )
+}
+
+# Resolve a path inside the `inst/tarchives` directory of `package`, erroring
+# with an actionable message when the package or the requested file is missing.
+archive_system_file <- function(..., package, call = caller_env()) {
+  path <- system.file("tarchives", ..., package = package)
+  if (!nzchar(path)) {
+    if (!nzchar(system.file(package = package))) {
+      cli::cli_abort(
+        c(
+          "Can't find package {.pkg {package}}.",
+          i = "Is it installed?"
+        ),
+        call = call
+      )
+    }
+    file <- file.path(...)
+    cli::cli_abort(
+      "Can't find {.file {file}} in the {.path inst/tarchives} directory of \\
+      package {.pkg {package}}.",
+      call = call
+    )
+  }
+  path
 }
 
 #' Path to the archived target script file
@@ -34,6 +50,8 @@ tar_archive_script <- function(
   envir = parent.frame(),
   script = targets::tar_config_get("script")
 ) {
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   with_dir_archive(
     package = package,
     pipeline = pipeline,
@@ -57,6 +75,8 @@ tar_archive_store <- function(
   pipeline,
   store = targets::tar_config_get("store")
 ) {
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   fs::path(
     tools::R_user_dir(
       "tarchives",
@@ -86,6 +106,8 @@ tar_archive <- function(
   script = targets::tar_config_get("script"),
   store = targets::tar_config_get("store")
 ) {
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   fmls_names <- rlang::fn_fmls_names(f)
 
   args <- list()

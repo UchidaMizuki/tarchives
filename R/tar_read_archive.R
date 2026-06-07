@@ -37,6 +37,9 @@ tar_read_archive_raw <- function(
   meta = NULL,
   store = targets::tar_config_get("store")
 ) {
+  check_string(name, allow_empty = FALSE)
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   store <- tar_archive_store(
     package = package,
     pipeline = pipeline,

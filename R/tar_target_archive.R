@@ -93,6 +93,8 @@ tar_target_archive_raw <- function(
   cue = targets::tar_option_get("cue"),
   description = targets::tar_option_get("description")
 ) {
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   args <- rlang::list2(...)
 
   tar_outdated_archive <- tar_archive(

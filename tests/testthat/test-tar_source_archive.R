@@ -4,7 +4,11 @@ targets::tar_test("tar_source_archive() works", {
       "tarchives"
     )
   )
-  expect_error(
+})
+
+test_that("tar_source_archive() errors for an unknown package", {
+  expect_snapshot(
+    error = TRUE,
     tar_source_archive(
       "tarchives-wrong"
     )
