@@ -283,7 +283,8 @@ for non-dynamically-branched targets that other targets
 dynamically branch over. For example: if your pipeline has
 <code>tar_target(name = y, command = x, pattern = map(x))</code>,
 then <code>tar_target(name = x, command = f(), memory = "auto")</code>
-will use persistent memory in order to avoid rereading all of <code>x</code>
+will use persistent memory for <code>x</code>
+in order to avoid rereading all of <code>x</code>
 for every branch of <code>y</code>.</p></li>
 <li><p><code>"transient"</code>: the target gets unloaded
 after every new target completes.
@@ -398,7 +399,7 @@ string <code>"survival model"</code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A target object. Users should not modify these directly,
+    <p>A target definition object. Users should not modify these directly,
 just feed them to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> in your target script file
 (default: <code>_targets.R</code>).</p>
     </div>
@@ -415,7 +416,7 @@ just feed them to <code><a href="https://rdrr.io/r/base/list.html" class="extern
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
