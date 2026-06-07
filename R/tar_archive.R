@@ -1,7 +1,6 @@
 with_dir_archive <- function(
   package,
   pipeline,
-  envir,
   code,
   call = caller_env()
 ) {
@@ -47,7 +46,6 @@ archive_system_file <- function(..., package, call = caller_env()) {
 tar_archive_script <- function(
   package,
   pipeline,
-  envir = parent.frame(),
   script = targets::tar_config_get("script")
 ) {
   check_string(package, allow_empty = FALSE)
@@ -55,7 +53,6 @@ tar_archive_script <- function(
   with_dir_archive(
     package = package,
     pipeline = pipeline,
-    envir = envir,
     fs::path_wd(script)
   )
 }
@@ -132,7 +129,6 @@ tar_archive <- function(
     with_dir_archive(
       package = package,
       pipeline = pipeline,
-      envir = envir,
       rlang::eval_tidy(
         rlang::call2(
           "f",

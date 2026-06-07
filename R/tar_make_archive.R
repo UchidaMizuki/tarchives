@@ -34,7 +34,6 @@ tar_make_archive <- function(
   script <- tar_archive_script(
     package = package,
     pipeline = pipeline,
-    envir = envir,
     script = script
   )
   store <- tar_archive_store(
@@ -45,7 +44,6 @@ tar_make_archive <- function(
   with_dir_archive(
     package = package,
     pipeline = pipeline,
-    envir = envir,
     targets::tar_make(
       names = {{ names }},
       shortcut = shortcut,
