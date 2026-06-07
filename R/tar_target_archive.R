@@ -113,7 +113,7 @@ tar_target_archive_raw <- function(
     names = name_archive,
     !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
   )
-  if (name %in% outdated) {
+  if (name_archive %in% outdated) {
     cue$mode <- "always"
 
     rlang::exec(
