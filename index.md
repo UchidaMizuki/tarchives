@@ -1,0 +1,162 @@
+# tarchives
+
+## Overview
+
+The goal of tarchives is to make targets pipelines into a package. It
+runs targets pipeline in /inst/tarchives and stores the results in the R
+user directory. This means that the user does not have to run the
+process repeatedly, and the developer has the flexibility to update the
+data as versions are updated.
+
+This package is a wrapper for the targets package and contains the
+following functions:
+
+- [`tar_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive.md):
+  Convert the targets function to tarchives version
+- [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md):
+  tarchives version of
+  [`targets::tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)
+  function
+- [`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md):
+  tarchives version of
+  [`targets::tar_read()`](https://docs.ropensci.org/targets/reference/tar_read.html)
+  function
+- [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md):
+  tarchives version of
+  [`targets::tar_load()`](https://docs.ropensci.org/targets/reference/tar_load.html)
+  function
+- [`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md):
+  tarchives version of
+  [`targets::tar_target()`](https://docs.ropensci.org/targets/reference/tar_target.html)
+  function
+- [`tar_meta_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_meta_archive.md):
+  tarchives version of
+  [`targets::tar_meta()`](https://docs.ropensci.org/targets/reference/tar_meta.html)
+  function
+- [`tar_manifest_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_manifest_archive.md):
+  tarchives version of
+  [`targets::tar_manifest()`](https://docs.ropensci.org/targets/reference/tar_manifest.html)
+  function
+- [`tar_destroy_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_destroy_archive.md):
+  tarchives version of
+  [`targets::tar_destroy()`](https://docs.ropensci.org/targets/reference/tar_destroy.html)
+  function
+
+## Installation
+
+``` r
+
+install.packages("tarchives")
+```
+
+### Development version
+
+You can install the development version of tarchives from
+[GitHub](https://github.com/) with:
+
+``` r
+
+install.packages("pak")
+pak::pak("UchidaMizuki/tarchives")
+```
+
+## Usage
+
+To use tarchives, run the following code under the package you are
+developing:
+
+``` r
+
+library(tarchives)
+use_tarchives()
+```
+
+This will create an `inst/tarchives` directory in your package, where
+your target pipelines will be stored. You can define your target
+pipeline in the `_targets.R` file in the `inst/tarchives/example-model`
+directory as follows:
+
+``` r
+
+# inst/tarchives/example-model/_targets.R
+library(targets)
+
+list(
+  tar_target(
+    data,
+    iris[iris$Species != "setosa", ]
+  ),
+  tar_target(
+    model,
+    lm(Sepal.Width ~ Sepal.Length, data)
+  )
+)
+```
+
+If you have created a package called `your-package` and saved the
+pipeline to a directory called `example-model` in the `inst/tarchives`
+directory, you can run it using the following command:
+
+``` r
+
+tar_make_archive(
+  package = "your-package",
+  pipeline = "example-model"
+)
+```
+
+``` R
+#> Warning message:
+#> package 'targets' was built under R version 4.4.2 
+```
+
+Then you can read the results using the
+[`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
+function:
+
+``` r
+
+tar_read_archive(
+  model,
+  package = "your-package",
+  pipeline = "example-model"
+)
+```
+
+``` R
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ Sepal.Length, data = data)
+#> 
+#> Coefficients:
+#>  (Intercept)  Sepal.Length  
+#>        1.131         0.278
+```
+
+### Declare a target from another pipeline
+
+You can also declare a target from another pipeline using the
+[`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md)
+function. For example, if you want to declare the `data` and `model`
+targets from the `example-model` pipeline in your `_targets.R` file, you
+can do it as follows:
+
+``` r
+
+library(targets)
+
+tar_source()
+
+list(
+  tarchives::tar_target_archive(
+    data,
+    package = "tarchives",
+    pipeline = "example-model"
+  ),
+  tarchives::tar_target_archive(
+    model,
+    package = "tarchives",
+    pipeline = "example-model"
+  )
+)
+```
