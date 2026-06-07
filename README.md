@@ -32,7 +32,15 @@ following functions:
   function
 - `tar_read_archive()`: tarchives version of `targets::tar_read()`
   function
+- `tar_load_archive()`: tarchives version of `targets::tar_load()`
+  function
 - `tar_target_archive()`: tarchives version of `targets::tar_target()`
+  function
+- `tar_meta_archive()`: tarchives version of `targets::tar_meta()`
+  function
+- `tar_manifest_archive()`: tarchives version of
+  `targets::tar_manifest()` function
+- `tar_destroy_archive()`: tarchives version of `targets::tar_destroy()`
   function
 
 ## Installation
@@ -93,13 +101,16 @@ tar_make_archive(
 )
 ```
 
+    #> Warning message:
+    #> package 'targets' was built under R version 4.4.2 
+
 Then you can read the results using the `tar_read_archive()` function:
 
 ``` r
 tar_read_archive(
   model,
   package = "your-package",
-  pipeline = "your-pipeline"
+  pipeline = "example-model"
 )
 ```
 

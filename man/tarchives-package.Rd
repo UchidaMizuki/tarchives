@@ -12,6 +12,7 @@ Runs 'targets' pipeline in '/inst/tarchives' and stores the results in the R use
 Useful links:
 \itemize{
   \item \url{https://github.com/UchidaMizuki/tarchives}
+  \item \url{https://uchidamizuki.github.io/tarchives/}
   \item Report bugs at \url{https://github.com/UchidaMizuki/tarchives/issues}
 }
 

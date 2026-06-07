@@ -13,8 +13,15 @@ reference:
   contents:
   - tar_make_archive
   - tar_read_archive
+  - tar_load_archive
   - tar_source_archive
   - tar_target_archive
+- title: Inspect and manage storage
+  desc: Inspect archived pipelines and clear their cached stores.
+  contents:
+  - tar_meta_archive
+  - tar_manifest_archive
+  - tar_destroy_archive
 - title: Lower-level helpers
   desc: Locate archive scripts and stores, or wrap targets functions directly.
   contents:
