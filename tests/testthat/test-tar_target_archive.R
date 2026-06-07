@@ -18,6 +18,13 @@ targets::tar_test("tar_target_archive() reads a target from another pipeline", {
 })
 
 targets::tar_test("tar_target_archive(name_archive=) reads under a new name", {
+  # Destroy the store first so the target must be rebuilt through the
+  # `name_archive` path.
+  tar_destroy_archive(
+    package = "tarchives",
+    pipeline = "example-model",
+    ask = FALSE
+  )
   writeLines(
     c(
       "library(targets)",

@@ -11,6 +11,7 @@ tar_read_archive(
   pipeline,
   branches = NULL,
   meta = NULL,
+  make = FALSE,
   store = targets::tar_config_get("store")
 )
 
@@ -20,6 +21,7 @@ tar_read_archive_raw(
   pipeline,
   branches = NULL,
   meta = NULL,
+  make = FALSE,
   store = targets::tar_config_get("store")
 )
 }
@@ -41,6 +43,11 @@ if the target is a pattern.}
 pipelines because all the metadata is stored in a single file.
 However, if you call \code{\link[targets:tar_meta]{tar_meta()}} beforehand and supply it to the \code{meta}
 argument, then successive calls to \code{tar_read()} may run much faster.}
+
+\item{make}{A scalar logical. If \code{TRUE}, the target is built with
+\code{\link[=tar_make_archive]{tar_make_archive()}} before reading when it is out of date. This lets you
+expose archived data through a plain accessor function without requiring
+callers to know about 'targets'. By default, \code{FALSE}.}
 
 \item{store}{Character of length 1, path to the
 \code{targets} data store. Defaults to \code{tar_config_get("store")},

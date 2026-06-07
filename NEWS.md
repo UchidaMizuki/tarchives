@@ -6,6 +6,8 @@
 * `tar_load_archive()` loads archived targets into an environment.
 * `tar_manifest_archive()` lists the targets defined in an archived pipeline.
 * `tar_meta_archive()` reads the metadata of an archived pipeline's store.
+* `tar_read_archive()` and `tar_read_archive_raw()` gain a `make` argument to build an out-of-date target before reading, which makes it easy to expose archived data through a plain accessor function.
+* `tar_target_archive()` now inspects each archived pipeline only once per session instead of once per declared target, avoiding repeated `tar_outdated()` subprocesses, and it now rebuilds correctly when `name_archive` differs from the target name.
 * Tests no longer leave files in the user cache directory (`tools::R_user_dir("tarchives", "cache")`) during `R CMD check`, which caused the package to be archived on CRAN.
 
 # tarchives 0.1.1
