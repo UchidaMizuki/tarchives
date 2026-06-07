@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+\.Rproj\.user
+\.Rhistory$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^inst/tarchives/.*/_targets$
