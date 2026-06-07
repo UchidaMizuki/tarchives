@@ -91,10 +91,11 @@ on the result to locally recreate the target's initial RNG state.}
 
 \item{pipeline}{A scalar character of the pipeline name.}
 
-\item{name_archive}{A scalar character of a name of archived target.
-If \code{NULL}, the name of the target is used. By default, \code{NULL}.}
+\item{name_archive}{Symbol, name of the archived target. If \code{NULL}, the
+name of the target is used. By default, \code{NULL}.}
 
-\item{...}{Arguments to pass to \link[targets:tar_outdated]{targets::tar_outdated}, \link[targets:tar_make]{targets::tar_make} or \link{tar_read_archive_raw}.}
+\item{...}{Arguments to pass to \code{\link[targets:tar_outdated]{targets::tar_outdated()}},
+\code{\link[targets:tar_make]{targets::tar_make()}} or \code{\link[=tar_read_archive_raw]{tar_read_archive_raw()}}.}
 
 \item{pattern}{Code to define a dynamic branching branching for a target.
 In \code{\link[targets:tar_target]{tar_target()}}, \code{pattern} is an unevaluated expression, e.g.
@@ -330,4 +331,9 @@ just feed them to \code{\link[=list]{list()}} in your target script file
 }
 \description{
 Declare a target to read an archive.
+}
+\details{
+\code{tar_target_archive()} captures \code{name} and \code{name_archive} with non-standard
+evaluation, whereas \code{tar_target_archive_raw()} takes them as character
+strings.
 }

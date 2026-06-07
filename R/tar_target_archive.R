@@ -2,9 +2,10 @@
 #'
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
-#' @param name_archive A scalar character of a name of archived target.
-#' If `NULL`, the name of the target is used. By default, `NULL`.
-#' @param ... Arguments to pass to [targets::tar_outdated], [targets::tar_make] or [tar_read_archive_raw].
+#' @param name_archive Symbol, name of the archived target. If `NULL`, the
+#' name of the target is used. By default, `NULL`.
+#' @param ... Arguments to pass to [targets::tar_outdated()],
+#' [targets::tar_make()] or [tar_read_archive_raw()].
 #' @inheritParams targets::tar_target
 #'
 #' @inherit targets::tar_target return
@@ -66,6 +67,11 @@ tar_target_archive <- function(
 }
 
 #' @rdname tar_target_archive
+#'
+#' @details
+#' `tar_target_archive()` captures `name` and `name_archive` with non-standard
+#' evaluation, whereas `tar_target_archive_raw()` takes them as character
+#' strings.
 #'
 #' @export
 tar_target_archive_raw <- function(

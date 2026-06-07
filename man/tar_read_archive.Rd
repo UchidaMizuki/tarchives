@@ -59,3 +59,7 @@ if \code{format = "file"} was set.
 \description{
 Read a target's value from archive storage
 }
+\details{
+\code{tar_read_archive()} captures \code{name} with non-standard evaluation, whereas
+\code{tar_read_archive_raw()} takes it as a character string.
+}
