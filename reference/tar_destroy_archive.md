@@ -36,11 +36,11 @@ tar_destroy_archive(
   - `"all"`: entire data store (default: `_targets/`) including cloud
     data, as well as download/upload scratch files.
 
-  - `"cloud"`: cloud data, including metadata, target object data from
-    targets with `tar_target(..., repository = "aws")`, and workspace
-    files saved on the cloud. Also deletes temporary staging files in
-    `file.path(tempdir(), "targets")` that may have been accidentally
-    left over from incomplete uploads or downloads.
+  - `"cloud"`: cloud data, including metadata, target definition object
+    data from targets with `tar_target(..., repository = "aws")`, and
+    workspace files saved on the cloud. Also deletes temporary staging
+    files in `file.path(tempdir(), "targets")` that may have been
+    accidentally left over from incomplete uploads or downloads.
 
   - `"local"`: all the local files in the data store but nothing on the
     cloud.
@@ -74,9 +74,9 @@ tar_destroy_archive(
 
 - batch_size:
 
-  Positive integer between 1 and 1000, number of target objects to
-  delete from the cloud with each HTTP API request. Currently only
-  supported for AWS. Cannot be more than 1000.
+  Positive integer between 1 and 1000, number of target definition
+  objects to delete from the cloud with each HTTP API request. Currently
+  only supported for AWS. Cannot be more than 1000.
 
 - verbose:
 

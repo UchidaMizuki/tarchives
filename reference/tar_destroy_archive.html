@@ -71,7 +71,7 @@ store of an archived pipeline from the R user cache directory
 <dt id="arg-destroy">destroy<a class="anchor" aria-label="anchor" href="#arg-destroy"></a></dt>
 <dd><p>Character of length 1, what to destroy. Choices:</p><ul><li><p><code>"all"</code>: entire data store (default: <code>_targets/</code>)
 including cloud data, as well as download/upload scratch files.</p></li>
-<li><p><code>"cloud"</code>: cloud data, including metadata, target object data
+<li><p><code>"cloud"</code>: cloud data, including metadata, target definition object data
 from targets with <code>tar_target(..., repository = "aws")</code>,
 and workspace files saved on the cloud.
 Also deletes temporary staging files in
@@ -107,7 +107,7 @@ data store.</p></li>
 
 <dt id="arg-batch-size">batch_size<a class="anchor" aria-label="anchor" href="#arg-batch-size"></a></dt>
 <dd><p>Positive integer between 1 and 1000,
-number of target objects to delete
+number of target definition objects to delete
 from the cloud with each HTTP API request.
 Currently only supported for AWS.
 Cannot be more than 1000.</p></dd>
