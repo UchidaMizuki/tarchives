@@ -12,7 +12,6 @@ Description: Runs 'targets' pipeline in '/inst/tarchives' and stores the results
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
 Imports: 
     callr,
     fs,
@@ -28,3 +27,4 @@ Depends:
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/UchidaMizuki/tarchives
 BugReports: https://github.com/UchidaMizuki/tarchives/issues
+Config/roxygen2/version: 8.0.0

@@ -8,8 +8,21 @@
 \description{
 Runs 'targets' pipeline in '/inst/tarchives' and stores the results in the R user directory. This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/UchidaMizuki/tarchives}
+  \item Report bugs at \url{https://github.com/UchidaMizuki/tarchives/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID})
+
+Authors:
+\itemize{
+  \item Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID})
+}
 
 }
 \keyword{internal}
