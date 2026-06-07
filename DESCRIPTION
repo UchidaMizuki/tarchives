@@ -1,6 +1,6 @@
 Package: tarchives
 Title: Make Your 'targets' Pipelines into a Package
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Mizuki", "Uchida", , "uchidamizuki@vivaldi.net", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-6534-6942"))
@@ -11,8 +11,7 @@ Description: Runs 'targets' pipeline in '/inst/tarchives' and stores the results
     as versions are updated.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
-Imports: 
+Imports:
     callr,
     fs,
     rlang,
