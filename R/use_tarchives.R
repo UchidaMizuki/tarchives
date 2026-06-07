@@ -8,6 +8,7 @@
 #'
 #' @export
 use_tarchives <- function(store = targets::tar_config_get("store")) {
+  check_string(store, allow_empty = FALSE)
   fs::dir_create("inst/tarchives")
   add_build_ignore(paste0("^inst/tarchives/.*/", store, "$"))
 }

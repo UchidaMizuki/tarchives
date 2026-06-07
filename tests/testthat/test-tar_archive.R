@@ -3,8 +3,7 @@ targets::tar_test("tar_archive_script() works", {
     package = "tarchives",
     pipeline = "example-model"
   )
-  expect_true(fs::is_file(script))
-  expect_true(fs::file_exists(script))
+  expect_equal(unname(fs::is_file(script)), TRUE)
 })
 
 targets::tar_test("tar_archive() works", {
@@ -44,5 +43,5 @@ targets::tar_test("tar_archive() works", {
     package = "tarchives",
     pipeline = "example-model"
   )
-  expect_true(fs::is_dir(store))
+  expect_equal(unname(fs::is_dir(store)), TRUE)
 })

@@ -28,6 +28,10 @@ tar_read_archive <- function(
 
 #' @rdname tar_read_archive
 #'
+#' @details
+#' `tar_read_archive()` captures `name` with non-standard evaluation, whereas
+#' `tar_read_archive_raw()` takes it as a character string.
+#'
 #' @export
 tar_read_archive_raw <- function(
   name,
@@ -37,6 +41,9 @@ tar_read_archive_raw <- function(
   meta = NULL,
   store = targets::tar_config_get("store")
 ) {
+  check_string(name, allow_empty = FALSE)
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   store <- tar_archive_store(
     package = package,
     pipeline = pipeline,

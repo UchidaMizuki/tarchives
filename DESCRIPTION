@@ -13,8 +13,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
     callr,
+    cli,
     fs,
-    rlang,
+    rlang (>= 1.1.0),
     targets,
     withr
 Suggests: 
@@ -23,6 +24,7 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 4.0.0)
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/UchidaMizuki/tarchives
+URL: https://github.com/UchidaMizuki/tarchives,
+    https://uchidamizuki.github.io/tarchives/
 BugReports: https://github.com/UchidaMizuki/tarchives/issues
 Config/roxygen2/version: 8.0.0

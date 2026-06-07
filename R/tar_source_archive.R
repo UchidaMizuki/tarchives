@@ -12,12 +12,8 @@ tar_source_archive <- function(
   envir = targets::tar_option_get("envir"),
   change_directory = FALSE
 ) {
-  files <- system.file(
-    "tarchives",
-    files,
-    package = package,
-    mustWork = TRUE
-  )
+  check_string(package, allow_empty = FALSE)
+  files <- archive_system_file(files, package = package)
   targets::tar_source(
     files = files,
     envir = envir,

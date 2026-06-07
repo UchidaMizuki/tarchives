@@ -29,10 +29,11 @@ tar_make_archive <- function(
   terminate_controller = TRUE,
   as_job = targets::tar_config_get("as_job")
 ) {
+  check_string(package, allow_empty = FALSE)
+  check_string(pipeline, allow_empty = FALSE)
   script <- tar_archive_script(
     package = package,
     pipeline = pipeline,
-    envir = envir,
     script = script
   )
   store <- tar_archive_store(
@@ -43,7 +44,6 @@ tar_make_archive <- function(
   with_dir_archive(
     package = package,
     pipeline = pipeline,
-    envir = envir,
     targets::tar_make(
       names = {{ names }},
       shortcut = shortcut,
