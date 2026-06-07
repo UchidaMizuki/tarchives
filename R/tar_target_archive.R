@@ -102,26 +102,23 @@ tar_target_archive_raw <- function(
   check_string(package, allow_empty = FALSE)
   check_string(pipeline, allow_empty = FALSE)
   args <- rlang::list2(...)
-
-  tar_outdated_archive <- tar_archive(
-    targets::tar_outdated,
+  store <- tar_archive_store(
     package = package,
     pipeline = pipeline
   )
-  outdated <- rlang::exec(
-    tar_outdated_archive,
-    names = name_archive,
-    !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
-  )
-  if (name %in% outdated) {
-    cue$mode <- "always"
 
-    rlang::exec(
-      tarchives::tar_make_archive,
+  # `archive_outdated()` inspects the whole pipeline once and memoises the
+  # result, so declaring many targets from one pipeline no longer launches a
+  # `tar_outdated()` subprocess per target. Membership is tested against
+  # `name_archive` (the archived target's name), not `name`.
+  if (name_archive %in% archive_outdated(package, pipeline, store, args)) {
+    cue$mode <- "always"
+    ensure_archive_built(
       package = package,
       pipeline = pipeline,
       names = name_archive,
-      !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_make)]
+      store = store,
+      args = args
     )
   }
 

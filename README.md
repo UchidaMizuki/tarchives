@@ -147,3 +147,28 @@ list(
   )
 )
 ```
+
+### Distributing as a data package
+
+tarchives ships the *pipeline* (the recipe), not the data itself. The
+data is generated on the user’s machine and cached in the R user
+directory, so you can distribute datasets derived from sources you are
+not licensed to redistribute.
+
+To expose a dataset to users who do not know targets, wrap
+`tar_read_archive()` with `make = TRUE` in a plain accessor function:
+
+``` r
+get_model <- function() {
+  tar_read_archive(
+    model,
+    package = "your-package",
+    pipeline = "example-model",
+    make = TRUE
+  )
+}
+```
+
+The first call builds the pipeline into the user cache; later calls read
+the cached result and rebuild automatically only when the pipeline
+changes.
