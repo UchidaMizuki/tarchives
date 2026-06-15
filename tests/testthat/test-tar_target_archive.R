@@ -90,3 +90,24 @@ targets::tar_test("tar_target_archive() does not build when the script is source
   expect_in("model", targets::tar_manifest()$name)
   expect_false(unname(fs::dir_exists(store)))
 })
+
+targets::tar_test("tar_target_archive() is up to date when nothing changes", {
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  targets::tar_make(reporter = "silent")
+
+  # The target tracks the installed source, so an unchanged package leaves it
+  # up to date rather than rerunning on every `tar_make()`.
+  expect_equal(targets::tar_outdated(), character(0))
+})

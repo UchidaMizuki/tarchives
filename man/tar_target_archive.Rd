@@ -339,9 +339,10 @@ strings.
 
 The archive is built (if outdated) and read when the target runs, not when
 the target script is sourced, so inspecting the pipeline with
-\code{\link[targets:tar_manifest]{targets::tar_manifest()}} or
-\code{\link[targets:tar_visnetwork]{targets::tar_visnetwork()}} does not trigger a
-build. The target defaults to \code{cue = tar_cue(mode = "always")} so that it
-tracks the current archive; downstream targets still only rebuild when the
-value actually changes.
+\code{\link[targets:tar_manifest]{targets::tar_manifest()}} or \code{\link[targets:tar_visnetwork]{targets::tar_visnetwork()}} does not trigger a
+build. The target tracks a fingerprint of the installed pipeline source
+(the package version and the contents of the pipeline directory and shared
+\code{R/} helpers), so it reruns and refreshes the data when the package
+providing the archive changes, and is skipped otherwise. Downstream targets
+still only rebuild when the value actually changes.
 }

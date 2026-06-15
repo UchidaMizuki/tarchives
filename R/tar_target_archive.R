@@ -76,9 +76,11 @@ tar_target_archive <- function(
 #' The archive is built (if outdated) and read when the target runs, not when
 #' the target script is sourced, so inspecting the pipeline with
 #' [targets::tar_manifest()] or [targets::tar_visnetwork()] does not trigger a
-#' build. The target defaults to `cue = tar_cue(mode = "always")` so that it
-#' tracks the current archive; downstream targets still only rebuild when the
-#' value actually changes.
+#' build. The target tracks a fingerprint of the installed pipeline source
+#' (the package version and the contents of the pipeline directory and shared
+#' `R/` helpers), so it reruns and refreshes the data when the package
+#' providing the archive changes, and is skipped otherwise. Downstream targets
+#' still only rebuild when the value actually changes.
 #'
 #' @export
 tar_target_archive_raw <- function(
@@ -135,10 +137,15 @@ tar_target_archive_raw <- function(
     )
   )
 
-  # Re-run on every `tar_make()` so the target tracks the current archive.
-  # Reading is cheap and downstream targets only rebuild when the value
-  # actually changes, so an unchanged archive does not propagate work.
-  cue <- cue %||% targets::tar_cue(mode = "always")
+  # Fold a fingerprint of the installed pipeline source into the string that
+  # `targets` hashes for up-to-dateness. The target then reruns exactly when
+  # the package providing the archive changes (e.g. a new version is
+  # installed), rebuilding and rereading the data, and is skipped otherwise.
+  string <- string %||%
+    paste0(
+      paste(deparse(command), collapse = "\n"),
+      tar_archive_fingerprint(package = package, pipeline = pipeline)
+    )
   targets::tar_target_raw(
     name = name,
     command = command,
