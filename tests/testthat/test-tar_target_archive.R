@@ -39,8 +39,7 @@ targets::tar_test("tar_target_archive(name_archive=) reads under a new name", {
 })
 
 targets::tar_test("tar_target_archive() rebuilds an outdated archive", {
-  # Destroy the archive so the rebuild branch runs with the default
-  # `cue = NULL`, which previously produced an invalid cue object.
+  # Destroy the archive so the target has to build it when it runs.
   tar_destroy_archive(
     package = "tarchives",
     pipeline = "example-model",
@@ -62,4 +61,32 @@ targets::tar_test("tar_target_archive() rebuilds an outdated archive", {
   targets::tar_make(reporter = "silent")
 
   expect_s3_class(targets::tar_read(model), "lm")
+})
+
+targets::tar_test("tar_target_archive() does not build when the script is sourced", {
+  tar_destroy_archive(
+    package = "tarchives",
+    pipeline = "example-model",
+    ask = FALSE
+  )
+  store <- tar_archive_store(
+    package = "tarchives",
+    pipeline = "example-model"
+  )
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  # Sourcing the script (here via `tar_manifest()`) must not trigger a build.
+  expect_in("model", targets::tar_manifest()$name)
+  expect_false(unname(fs::dir_exists(store)))
 })

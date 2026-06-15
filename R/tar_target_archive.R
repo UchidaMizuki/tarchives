@@ -4,8 +4,8 @@
 #' @param pipeline A scalar character of the pipeline name.
 #' @param name_archive Symbol, name of the archived target. If `NULL`, the
 #' name of the target is used. By default, `NULL`.
-#' @param ... Arguments to pass to [targets::tar_outdated()],
-#' [targets::tar_make()] or [tar_read_archive_raw()].
+#' @param ... Arguments to pass to [tar_make_archive()] or
+#' [tar_read_archive_raw()].
 #' @inheritParams targets::tar_target
 #'
 #' @inherit targets::tar_target return
@@ -73,6 +73,13 @@ tar_target_archive <- function(
 #' evaluation, whereas `tar_target_archive_raw()` takes them as character
 #' strings.
 #'
+#' The archive is built (if outdated) and read when the target runs, not when
+#' the target script is sourced, so inspecting the pipeline with
+#' [targets::tar_manifest()] or [targets::tar_visnetwork()] does not trigger a
+#' build. The target defaults to `cue = tar_cue(mode = "always")` so that it
+#' tracks the current archive; downstream targets still only rebuild when the
+#' value actually changes.
+#'
 #' @export
 tar_target_archive_raw <- function(
   name,
@@ -103,40 +110,35 @@ tar_target_archive_raw <- function(
   check_string(pipeline, allow_empty = FALSE)
   args <- rlang::list2(...)
 
-  tar_outdated_archive <- tar_archive(
-    targets::tar_outdated,
-    package = package,
-    pipeline = pipeline
-  )
-  outdated <- rlang::exec(
-    tar_outdated_archive,
-    names = name_archive,
-    !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
-  )
-  if (name_archive %in% outdated) {
-    # Force the target to rebuild so it re-reads the freshly built archive.
-    # `cue` defaults to `NULL`, so start from a proper `tar_cue()` object
-    # before overriding its mode instead of coercing `NULL` into a bare list.
-    cue <- cue %||% targets::tar_cue()
-    cue$mode <- "always"
-
-    rlang::exec(
-      tarchives::tar_make_archive,
+  # Build the upstream archive (if outdated) and read the target as part of the
+  # target's *command*, so the work happens at build time inside the pipeline's
+  # own process. Doing it here, rather than when `tar_target_archive()` is
+  # called, avoids triggering builds whenever `_targets.R` is merely sourced --
+  # e.g. by `tar_manifest()`, `tar_network()`, or `tar_visnetwork()`.
+  command <- rlang::call2(
+    "{",
+    rlang::call2(
+      "tar_make_archive",
       package = package,
       pipeline = pipeline,
       names = name_archive,
-      !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_make)]
+      !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_make)],
+      .ns = "tarchives"
+    ),
+    rlang::call2(
+      "tar_read_archive_raw",
+      name = name_archive,
+      package = package,
+      pipeline = pipeline,
+      !!!args[names(args) %in% rlang::fn_fmls_names(tar_read_archive_raw)],
+      .ns = "tarchives"
     )
-  }
-
-  command <- rlang::call2(
-    "tar_read_archive_raw",
-    name = name_archive,
-    package = package,
-    pipeline = pipeline,
-    !!!args[names(args) %in% rlang::fn_fmls_names(tar_read_archive_raw)],
-    .ns = "tarchives"
   )
+
+  # Re-run on every `tar_make()` so the target tracks the current archive.
+  # Reading is cheap and downstream targets only rebuild when the value
+  # actually changes, so an unchanged archive does not propagate work.
+  cue <- cue %||% targets::tar_cue(mode = "always")
   targets::tar_target_raw(
     name = name,
     command = command,
