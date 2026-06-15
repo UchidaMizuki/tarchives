@@ -76,11 +76,10 @@ tar_target_archive <- function(
 #' The archive is built (if outdated) and read when the target runs, not when
 #' the target script is sourced, so inspecting the pipeline with
 #' [targets::tar_manifest()] or [targets::tar_visnetwork()] does not trigger a
-#' build. The target tracks a fingerprint of the installed pipeline source
-#' (the package version and the contents of the pipeline directory and shared
-#' `R/` helpers), so it reruns and refreshes the data when the package
-#' providing the archive changes, and is skipped otherwise. Downstream targets
-#' still only rebuild when the value actually changes.
+#' build. The target tracks the installed version of `package`, so it reruns
+#' and refreshes the data when a new version of the package providing the
+#' archive is installed, and is skipped otherwise. Downstream targets still
+#' only rebuild when the value actually changes.
 #'
 #' @export
 tar_target_archive_raw <- function(
@@ -137,14 +136,16 @@ tar_target_archive_raw <- function(
     )
   )
 
-  # Fold a fingerprint of the installed pipeline source into the string that
-  # `targets` hashes for up-to-dateness. The target then reruns exactly when
-  # the package providing the archive changes (e.g. a new version is
-  # installed), rebuilding and rereading the data, and is skipped otherwise.
+  # Fold the installed package version into the string that `targets` hashes
+  # for up-to-dateness (the `string` argument is the mechanism `targets`
+  # provides for this). The target then reruns -- rebuilding and rereading the
+  # data -- when a new version of the package providing the archive is
+  # installed, matching the "update the data as versions are updated" model,
+  # and is skipped otherwise.
   string <- string %||%
     paste0(
       paste(deparse(command), collapse = "\n"),
-      tar_archive_fingerprint(package = package, pipeline = pipeline)
+      utils::packageVersion(package)
     )
   targets::tar_target_raw(
     name = name,

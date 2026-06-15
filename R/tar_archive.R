@@ -106,33 +106,6 @@ check_archive_store_exists <- function(
   invisible(store)
 }
 
-# Fingerprint the installed source of an archived pipeline (package version
-# plus the contents of the pipeline directory and the shared `R/` helpers).
-# This only reads and hashes source files -- it never runs the pipeline -- so
-# it is cheap and side-effect free, and it lets a target detect when the
-# package providing the archive has changed. The cached `_targets` store is
-# excluded because it is not part of the pipeline's source.
-tar_archive_fingerprint <- function(package, pipeline, call = caller_env()) {
-  pipeline_dir <- archive_system_file(pipeline, package = package, call = call)
-  store_dir <- fs::path(pipeline_dir, "_targets")
-  dirs <- pipeline_dir
-  shared_r <- system.file("tarchives", "R", package = package)
-  if (nzchar(shared_r)) {
-    dirs <- c(dirs, shared_r)
-  }
-  files <- unlist(lapply(dirs, function(dir) {
-    as.character(fs::dir_ls(dir, recurse = TRUE, type = "file"))
-  }))
-  files <- files[!fs::path_has_parent(files, store_dir)]
-  files <- sort(unique(files))
-  pkg_root <- system.file(package = package)
-  rlang::hash(list(
-    version = as.character(utils::packageVersion(package)),
-    files = as.character(fs::path_rel(files, pkg_root)),
-    hashes = unname(tools::md5sum(files))
-  ))
-}
-
 #' Function factory for archived targets
 #'
 #' @param f A function of targets package.
