@@ -116,3 +116,6 @@ without any influence from parallel computing or priorities).
 tarchives version of \code{\link[targets:tar_manifest]{targets::tar_manifest()}}. Returns a data frame of the
 targets defined in an archived pipeline's target script file.
 }
+\seealso{
+\code{\link[=tar_archive_pipelines]{tar_archive_pipelines()}} to list the pipelines in a package.
+}

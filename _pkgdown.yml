@@ -17,10 +17,11 @@ reference:
   - tar_source_archive
   - tar_target_archive
 - title: Inspect and manage storage
-  desc: Inspect archived pipelines and clear their cached stores.
+  desc: Discover and inspect archived pipelines and clear their cached stores.
   contents:
-  - tar_meta_archive
+  - tar_archive_pipelines
   - tar_manifest_archive
+  - tar_meta_archive
   - tar_destroy_archive
 - title: Lower-level helpers
   desc: Locate archive scripts and stores, or wrap targets functions directly.
