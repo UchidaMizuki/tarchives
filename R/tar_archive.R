@@ -85,6 +85,27 @@ tar_archive_store <- function(
   )
 }
 
+# Abort with an actionable message when an archived store has not been built
+# yet, rather than letting `targets` fail with a less obvious error.
+check_archive_store_exists <- function(
+  store,
+  package,
+  pipeline,
+  call = caller_env()
+) {
+  if (!fs::dir_exists(store)) {
+    cli::cli_abort(
+      c(
+        "Can't find the archived store for pipeline {.val {pipeline}} of \\
+        package {.pkg {package}}.",
+        i = "Have you run {.code tar_make_archive()} for this pipeline yet?"
+      ),
+      call = call
+    )
+  }
+  invisible(store)
+}
+
 #' Function factory for archived targets
 #'
 #' @param f A function of targets package.

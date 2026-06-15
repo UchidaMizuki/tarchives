@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_make_archive.R
 \name{tar_make_archive}
 \alias{tar_make_archive}
-\title{Run an archived pipeline of targets.}
+\title{Run an archived pipeline of targets}
 \usage{
 tar_make_archive(
   package,
@@ -166,5 +166,5 @@ a handle to the \code{callr} background process is returned. Either way,
 the value is invisibly returned.
 }
 \description{
-Run an archived pipeline of targets.
+Run an archived pipeline of targets
 }

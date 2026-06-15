@@ -1,4 +1,4 @@
-#' Run archived R scripts.
+#' Run archived R scripts
 #'
 #' @param package A scalar character of the package name.
 #' @inheritParams targets::tar_source

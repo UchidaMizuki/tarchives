@@ -3,7 +3,7 @@
 \name{tar_target_archive}
 \alias{tar_target_archive}
 \alias{tar_target_archive_raw}
-\title{Declare a target to read an archive.}
+\title{Declare a target to read an archive}
 \usage{
 tar_target_archive(
   name,
@@ -330,7 +330,7 @@ just feed them to \code{\link[=list]{list()}} in your target script file
 (default: \verb{_targets.R}).
 }
 \description{
-Declare a target to read an archive.
+Declare a target to read an archive
 }
 \details{
 \code{tar_target_archive()} captures \code{name} and \code{name_archive} with non-standard

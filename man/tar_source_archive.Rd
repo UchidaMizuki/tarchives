@@ -2,7 +2,7 @@
 % Please edit documentation in R/tar_source_archive.R
 \name{tar_source_archive}
 \alias{tar_source_archive}
-\title{Run archived R scripts.}
+\title{Run archived R scripts}
 \usage{
 tar_source_archive(
   package,
@@ -30,5 +30,5 @@ before running it.}
 \code{NULL} (invisibly)
 }
 \description{
-Run archived R scripts.
+Run archived R scripts
 }

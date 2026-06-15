@@ -1,4 +1,4 @@
-#' Declare a target to read an archive.
+#' Declare a target to read an archive
 #'
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
@@ -114,6 +114,10 @@ tar_target_archive_raw <- function(
     !!!args[names(args) %in% rlang::fn_fmls_names(targets::tar_outdated)],
   )
   if (name_archive %in% outdated) {
+    # Force the target to rebuild so it re-reads the freshly built archive.
+    # `cue` defaults to `NULL`, so start from a proper `tar_cue()` object
+    # before overriding its mode instead of coercing `NULL` into a bare list.
+    cue <- cue %||% targets::tar_cue()
     cue$mode <- "always"
 
     rlang::exec(

@@ -49,6 +49,7 @@ tar_read_archive_raw <- function(
     pipeline = pipeline,
     store = store
   )
+  check_archive_store_exists(store, package = package, pipeline = pipeline)
   meta <- meta %||%
     targets::tar_meta(
       store = store

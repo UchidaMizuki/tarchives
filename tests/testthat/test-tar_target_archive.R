@@ -37,3 +37,29 @@ targets::tar_test("tar_target_archive(name_archive=) reads under a new name", {
   expect_s3_class(targets::tar_read(my_model), "lm")
   expect_in("my_model", targets::tar_manifest()$name)
 })
+
+targets::tar_test("tar_target_archive() rebuilds an outdated archive", {
+  # Destroy the archive so the rebuild branch runs with the default
+  # `cue = NULL`, which previously produced an invalid cue object.
+  tar_destroy_archive(
+    package = "tarchives",
+    pipeline = "example-model",
+    ask = FALSE
+  )
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  targets::tar_make(reporter = "silent")
+
+  expect_s3_class(targets::tar_read(model), "lm")
+})

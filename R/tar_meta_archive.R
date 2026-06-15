@@ -26,6 +26,7 @@ tar_meta_archive <- function(
     pipeline = pipeline,
     store = store
   )
+  check_archive_store_exists(store, package = package, pipeline = pipeline)
   targets::tar_meta(
     names = {{ names }},
     fields = {{ fields }},
