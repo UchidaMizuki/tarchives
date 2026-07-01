@@ -13,3 +13,14 @@ targets::tar_test("tar_read_archive() works", {
     "lm"
   )
 })
+
+targets::tar_test("tar_read_archive() errors when the store is not built", {
+  expect_snapshot(
+    error = TRUE,
+    tar_read_archive(
+      model,
+      package = "tarchives",
+      pipeline = "not-built"
+    )
+  )
+})

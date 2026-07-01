@@ -37,3 +37,77 @@ targets::tar_test("tar_target_archive(name_archive=) reads under a new name", {
   expect_s3_class(targets::tar_read(my_model), "lm")
   expect_in("my_model", targets::tar_manifest()$name)
 })
+
+targets::tar_test("tar_target_archive() rebuilds an outdated archive", {
+  # Destroy the archive so the target has to build it when it runs.
+  tar_destroy_archive(
+    package = "tarchives",
+    pipeline = "example-model",
+    ask = FALSE
+  )
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  targets::tar_make(reporter = "silent")
+
+  expect_s3_class(targets::tar_read(model), "lm")
+})
+
+targets::tar_test("tar_target_archive() does not build when the script is sourced", {
+  tar_destroy_archive(
+    package = "tarchives",
+    pipeline = "example-model",
+    ask = FALSE
+  )
+  store <- tar_archive_store(
+    package = "tarchives",
+    pipeline = "example-model"
+  )
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  # Sourcing the script (here via `tar_manifest()`) must not trigger a build.
+  expect_in("model", targets::tar_manifest()$name)
+  expect_false(unname(fs::dir_exists(store)))
+})
+
+targets::tar_test("tar_target_archive() is up to date when nothing changes", {
+  writeLines(
+    c(
+      "library(targets)",
+      "list(",
+      "  tarchives::tar_target_archive(",
+      "    model,",
+      "    package = 'tarchives',",
+      "    pipeline = 'example-model'",
+      "  )",
+      ")"
+    ),
+    "_targets.R"
+  )
+  targets::tar_make(reporter = "silent")
+
+  # The target tracks the installed source, so an unchanged package leaves it
+  # up to date rather than rerunning on every `tar_make()`.
+  expect_equal(targets::tar_outdated(), character(0))
+})

@@ -10,3 +10,13 @@ targets::tar_test("tar_meta_archive() returns metadata", {
   )
   expect_in("model", meta$name)
 })
+
+targets::tar_test("tar_meta_archive() errors when the store is not built", {
+  expect_snapshot(
+    error = TRUE,
+    tar_meta_archive(
+      package = "tarchives",
+      pipeline = "not-built"
+    )
+  )
+})

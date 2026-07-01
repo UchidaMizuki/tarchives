@@ -3,7 +3,7 @@
 \name{tar_target_archive}
 \alias{tar_target_archive}
 \alias{tar_target_archive_raw}
-\title{Declare a target to read an archive.}
+\title{Declare a target to read an archive}
 \usage{
 tar_target_archive(
   name,
@@ -94,8 +94,8 @@ on the result to locally recreate the target's initial RNG state.}
 \item{name_archive}{Symbol, name of the archived target. If \code{NULL}, the
 name of the target is used. By default, \code{NULL}.}
 
-\item{...}{Arguments to pass to \code{\link[targets:tar_outdated]{targets::tar_outdated()}},
-\code{\link[targets:tar_make]{targets::tar_make()}} or \code{\link[=tar_read_archive_raw]{tar_read_archive_raw()}}.}
+\item{...}{Arguments to pass to \code{\link[=tar_make_archive]{tar_make_archive()}} or
+\code{\link[=tar_read_archive_raw]{tar_read_archive_raw()}}.}
 
 \item{pattern}{Code to define a dynamic branching branching for a target.
 In \code{\link[targets:tar_target]{tar_target()}}, \code{pattern} is an unevaluated expression, e.g.
@@ -330,10 +330,18 @@ just feed them to \code{\link[=list]{list()}} in your target script file
 (default: \verb{_targets.R}).
 }
 \description{
-Declare a target to read an archive.
+Declare a target to read an archive
 }
 \details{
 \code{tar_target_archive()} captures \code{name} and \code{name_archive} with non-standard
 evaluation, whereas \code{tar_target_archive_raw()} takes them as character
 strings.
+
+The archive is built (if outdated) and read when the target runs, not when
+the target script is sourced, so inspecting the pipeline with
+\code{\link[targets:tar_manifest]{targets::tar_manifest()}} or \code{\link[targets:tar_visnetwork]{targets::tar_visnetwork()}} does not trigger a
+build. The target tracks the installed version of \code{package}, so it reruns
+and refreshes the data when a new version of the package providing the
+archive is installed, and is skipped otherwise. Downstream targets still
+only rebuild when the value actually changes.
 }

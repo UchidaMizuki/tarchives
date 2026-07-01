@@ -1,4 +1,4 @@
-#' Run an archived pipeline of targets.
+#' Run an archived pipeline of targets
 #'
 #' @param package A scalar character of the package name.
 #' @param pipeline A scalar character of the pipeline name.
