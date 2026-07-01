@@ -1,6 +1,6 @@
-# Declare a target to read an archive.
+# Declare a target to read an archive
 
-Declare a target to read an archive.
+Declare a target to read an archive
 
 ## Usage
 
@@ -107,8 +107,7 @@ tar_target_archive_raw(
 - ...:
 
   Arguments to pass to
-  [`targets::tar_outdated()`](https://docs.ropensci.org/targets/reference/tar_outdated.html),
-  [`targets::tar_make()`](https://docs.ropensci.org/targets/reference/tar_make.html)
+  [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md)
   or
   [`tar_read_archive_raw()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md).
 
@@ -397,3 +396,13 @@ script file (default: `_targets.R`).
 `tar_target_archive()` captures `name` and `name_archive` with
 non-standard evaluation, whereas `tar_target_archive_raw()` takes them
 as character strings.
+
+The archive is built (if outdated) and read when the target runs, not
+when the target script is sourced, so inspecting the pipeline with
+[`targets::tar_manifest()`](https://docs.ropensci.org/targets/reference/tar_manifest.html)
+or
+[`targets::tar_visnetwork()`](https://docs.ropensci.org/targets/reference/tar_visnetwork.html)
+does not trigger a build. The target tracks the installed version of
+`package`, so it reruns and refreshes the data when a new version of the
+package providing the archive is installed, and is skipped otherwise.
+Downstream targets still only rebuild when the value actually changes.

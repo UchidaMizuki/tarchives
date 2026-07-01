@@ -175,17 +175,17 @@ Add tarchives to a package you are developing.
 tarchives versions of the main targets functions.
 
 - [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md)
-  : Run an archived pipeline of targets.
+  : Run an archived pipeline of targets
 - [`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
   [`tar_read_archive_raw()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
   : Read a target's value from archive storage
 - [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md)
   : Load a target's value from archive storage
 - [`tar_source_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_source_archive.md)
-  : Run archived R scripts.
+  : Run archived R scripts
 - [`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md)
   [`tar_target_archive_raw()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md)
-  : Declare a target to read an archive.
+  : Declare a target to read an archive
 
 ## Inspect and manage storage
 

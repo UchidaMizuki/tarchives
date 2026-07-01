@@ -1,6 +1,6 @@
-# Run archived R scripts.
+# Run archived R scripts
 
-Run archived R scripts.
+Run archived R scripts
 
 ## Usage
 

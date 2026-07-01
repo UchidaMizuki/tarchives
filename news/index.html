@@ -46,6 +46,10 @@
 <code><a href="../reference/tar_manifest_archive.html">tar_manifest_archive()</a></code> lists the targets defined in an archived pipeline.</li>
 <li>
 <code><a href="../reference/tar_meta_archive.html">tar_meta_archive()</a></code> reads the metadata of an archived pipeline’s store.</li>
+<li>
+<code><a href="../reference/tar_read_archive.html">tar_read_archive()</a></code>, <code><a href="../reference/tar_load_archive.html">tar_load_archive()</a></code>, and <code><a href="../reference/tar_meta_archive.html">tar_meta_archive()</a></code> now fail with an informative error when the archived store has not been built yet.</li>
+<li>
+<code><a href="../reference/tar_target_archive.html">tar_target_archive()</a></code> now builds and reads the archive when the target runs rather than when the target script is sourced, so inspecting a pipeline with <code><a href="https://docs.ropensci.org/targets/reference/tar_manifest.html" class="external-link">tar_manifest()</a></code> or <code><a href="https://docs.ropensci.org/targets/reference/tar_visnetwork.html" class="external-link">tar_visnetwork()</a></code> no longer triggers a build. The target tracks the installed version of the package, so it refreshes the data when a new version of the package providing the archive is installed and is skipped otherwise.</li>
 <li>Tests no longer leave files in the user cache directory (<code>tools::R_user_dir("tarchives", "cache")</code>) during <code>R CMD check</code>, which caused the package to be archived on CRAN.</li>
 </ul></div>
     <div class="section level2">

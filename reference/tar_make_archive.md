@@ -1,6 +1,6 @@
-# Run an archived pipeline of targets.
+# Run an archived pipeline of targets
 
-Run an archived pipeline of targets.
+Run an archived pipeline of targets
 
 ## Usage
 

@@ -16,6 +16,21 @@
   lists the targets defined in an archived pipeline.
 - [`tar_meta_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_meta_archive.md)
   reads the metadata of an archived pipeline’s store.
+- [`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md),
+  [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md),
+  and
+  [`tar_meta_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_meta_archive.md)
+  now fail with an informative error when the archived store has not
+  been built yet.
+- [`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md)
+  now builds and reads the archive when the target runs rather than when
+  the target script is sourced, so inspecting a pipeline with
+  [`tar_manifest()`](https://docs.ropensci.org/targets/reference/tar_manifest.html)
+  or
+  [`tar_visnetwork()`](https://docs.ropensci.org/targets/reference/tar_visnetwork.html)
+  no longer triggers a build. The target tracks the installed version of
+  the package, so it refreshes the data when a new version of the
+  package providing the archive is installed and is skipped otherwise.
 - Tests no longer leave files in the user cache directory
   (`tools::R_user_dir("tarchives", "cache")`) during `R CMD check`,
   which caused the package to be archived on CRAN.
