@@ -9,6 +9,8 @@
 #'
 #' @inherit targets::tar_manifest return
 #'
+#' @seealso [tar_archive_pipelines()] to list the pipelines in a package.
+#'
 #' @export
 tar_manifest_archive <- function(
   package,

@@ -2,6 +2,7 @@
 
 * The archive functions now validate their `package` and `pipeline` arguments and report a clear error when the package or pipeline cannot be found.
 * tarchives no longer depends on usethis.
+* `tar_archive_pipelines()` lists the pipelines bundled in a package.
 * `tar_destroy_archive()` removes the cached store of an archived pipeline.
 * `tar_load_archive()` loads archived targets into an environment.
 * `tar_manifest_archive()` lists the targets defined in an archived pipeline.
