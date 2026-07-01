@@ -6,6 +6,8 @@
   arguments and report a clear error when the package or pipeline cannot
   be found.
 - tarchives no longer depends on usethis.
+- [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)
+  lists the pipelines bundled in a package.
 - [`tar_destroy_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_destroy_archive.md)
   removes the cached store of an archived pipeline.
 - [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md)

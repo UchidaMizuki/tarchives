@@ -174,3 +174,8 @@ tar_manifest_archive(
 A data frame of information about the targets in the pipeline. Rows
 appear in topological order (the order they will run without any
 influence from parallel computing or priorities).
+
+## See also
+
+[`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)
+to list the pipelines in a package.

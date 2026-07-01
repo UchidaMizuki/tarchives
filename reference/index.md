@@ -26,12 +26,14 @@ tarchives versions of the main targets functions.
 
 ## Inspect and manage storage
 
-Inspect archived pipelines and clear their cached stores.
+Discover and inspect archived pipelines and clear their cached stores.
 
-- [`tar_meta_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_meta_archive.md)
-  : Read metadata from archive storage
+- [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)
+  : List the archived pipelines in a package
 - [`tar_manifest_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_manifest_archive.md)
   : List the targets of an archived pipeline
+- [`tar_meta_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_meta_archive.md)
+  : Read metadata from archive storage
 - [`tar_destroy_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_destroy_archive.md)
   : Destroy an archived pipeline's storage
 

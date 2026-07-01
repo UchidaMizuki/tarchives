@@ -88,9 +88,8 @@ tar_destroy_archive(
 
   Logical of length 1, whether to pause with a menu prompt before
   deleting files. To disable this menu, set the `TAR_ASK` environment
-  variable to `"false"`.
-  [`usethis::edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
-  can help set environment variables.
+  variable to `"false"`. `usethis::edit_r_environ()` can help set
+  environment variables.
 
 - store:
 
