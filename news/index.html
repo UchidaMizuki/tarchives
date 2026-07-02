@@ -39,6 +39,8 @@
 <li>
 <code><a href="../reference/tar_archive_pipelines.html">tar_archive_pipelines()</a></code> lists the pipelines bundled in a package.</li>
 <li>
+<code><a href="../reference/tar_archive_pipelines.html">tar_archive_pipelines()</a></code>, <code><a href="../reference/tar_archive_script.html">tar_archive_script()</a></code>, <code><a href="../reference/tar_make_archive.html">tar_make_archive()</a></code>, <code><a href="../reference/tar_manifest_archive.html">tar_manifest_archive()</a></code>, and <code><a href="../reference/tar_source_archive.html">tar_source_archive()</a></code> now correctly resolve <code>package</code> when it is loaded with <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> (e.g. during interactive package development), instead of silently falling back to the installed copy.</li>
+<li>
 <code><a href="../reference/tar_destroy_archive.html">tar_destroy_archive()</a></code> removes the cached store of an archived pipeline.</li>
 <li>
 <code><a href="../reference/tar_load_archive.html">tar_load_archive()</a></code> loads archived targets into an environment.</li>

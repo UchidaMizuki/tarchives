@@ -42,6 +42,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tar_archive_script</span><span class="op">(</span></span>
 <span>  <span class="va">package</span>,</span>
 <span>  <span class="va">pipeline</span>,</span>
+<span>  envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  script <span class="op">=</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_config_get.html" class="external-link">tar_config_get</a></span><span class="op">(</span><span class="st">"script"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -56,6 +57,13 @@
 
 <dt id="arg-pipeline">pipeline<a class="anchor" aria-label="anchor" href="#arg-pipeline"></a></dt>
 <dd><p>A scalar character of the pipeline name.</p></dd>
+
+
+<dt id="arg-envir">envir<a class="anchor" aria-label="anchor" href="#arg-envir"></a></dt>
+<dd><p>An environment used to resolve <code>package</code>, so that a package
+currently loaded with <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> (e.g. during interactive
+package development) is resolved to its source directory instead of its
+installed one. Defaults to the calling environment.</p></dd>
 
 
 <dt id="arg-script">script<a class="anchor" aria-label="anchor" href="#arg-script"></a></dt>

@@ -10,7 +10,11 @@ or inspecting their targets with
 ## Usage
 
 ``` r
-tar_archive_pipelines(package, script = targets::tar_config_get("script"))
+tar_archive_pipelines(
+  package,
+  envir = parent.frame(),
+  script = targets::tar_config_get("script")
+)
 ```
 
 ## Arguments
@@ -18,6 +22,15 @@ tar_archive_pipelines(package, script = targets::tar_config_get("script"))
 - package:
 
   A scalar character of the package name.
+
+- envir:
+
+  An environment used to resolve `package`, so that a package currently
+  loaded with
+  [`pkgload::load_all()`](https://pkgload.r-lib.org/reference/load_all.html)
+  (e.g. during interactive package development) is resolved to its
+  source directory instead of its installed one. Defaults to the calling
+  environment.
 
 - script:
 

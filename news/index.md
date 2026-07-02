@@ -8,6 +8,16 @@
 - tarchives no longer depends on usethis.
 - [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)
   lists the pipelines bundled in a package.
+- [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md),
+  [`tar_archive_script()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_script.md),
+  [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md),
+  [`tar_manifest_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_manifest_archive.md),
+  and
+  [`tar_source_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_source_archive.md)
+  now correctly resolve `package` when it is loaded with
+  [`pkgload::load_all()`](https://pkgload.r-lib.org/reference/load_all.html)
+  (e.g. during interactive package development), instead of silently
+  falling back to the installed copy.
 - [`tar_destroy_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_destroy_archive.md)
   removes the cached store of an archived pipeline.
 - [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md)
