@@ -28,11 +28,13 @@ tar_manifest_archive <- function(
   script <- tar_archive_script(
     package = package,
     pipeline = pipeline,
+    envir = envir,
     script = script
   )
   with_dir_archive(
     package = package,
     pipeline = pipeline,
+    envir = envir,
     targets::tar_manifest(
       names = {{ names }},
       fields = {{ fields }},

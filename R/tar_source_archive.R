@@ -13,7 +13,7 @@ tar_source_archive <- function(
   change_directory = FALSE
 ) {
   check_string(package, allow_empty = FALSE)
-  files <- archive_system_file(files, package = package)
+  files <- archive_system_file(files, package = package, envir = parent.frame())
   targets::tar_source(
     files = files,
     envir = envir,
