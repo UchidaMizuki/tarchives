@@ -6,6 +6,10 @@
 #' targets with [tar_manifest_archive()].
 #'
 #' @param package A scalar character of the package name.
+#' @param envir An environment used to resolve `package`, so that a package
+#' currently loaded with `pkgload::load_all()` (e.g. during interactive
+#' package development) is resolved to its source directory instead of its
+#' installed one. Defaults to the calling environment.
 #' @inheritParams targets::tar_make
 #'
 #' @return A character vector of pipeline names. A pipeline is a directory in
@@ -17,17 +21,18 @@
 #' @export
 tar_archive_pipelines <- function(
   package,
+  envir = parent.frame(),
   script = targets::tar_config_get("script")
 ) {
   check_string(package, allow_empty = FALSE)
   check_string(script, allow_empty = FALSE)
-  if (!nzchar(system.file(package = package))) {
+  if (!nzchar(eval_system_file(package = package, envir = envir))) {
     cli::cli_abort(c(
       "Can't find package {.pkg {package}}.",
       i = "Is it installed?"
     ))
   }
-  root <- system.file("tarchives", package = package)
+  root <- eval_system_file("tarchives", package = package, envir = envir)
   if (!nzchar(root)) {
     return(character())
   }

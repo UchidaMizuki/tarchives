@@ -4,10 +4,19 @@
 \alias{tar_archive_pipelines}
 \title{List the archived pipelines in a package}
 \usage{
-tar_archive_pipelines(package, script = targets::tar_config_get("script"))
+tar_archive_pipelines(
+  package,
+  envir = parent.frame(),
+  script = targets::tar_config_get("script")
+)
 }
 \arguments{
 \item{package}{A scalar character of the package name.}
+
+\item{envir}{An environment used to resolve \code{package}, so that a package
+currently loaded with \code{pkgload::load_all()} (e.g. during interactive
+package development) is resolved to its source directory instead of its
+installed one. Defaults to the calling environment.}
 
 \item{script}{Character of length 1, path to the
 target script file. Defaults to \code{tar_config_get("script")},
