@@ -5,6 +5,9 @@
 #'
 #' @inherit targets::tar_source return
 #'
+#' @examples
+#' tar_source_archive(package = "tarchives")
+#'
 #' @export
 tar_source_archive <- function(
   package,

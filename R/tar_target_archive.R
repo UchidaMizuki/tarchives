@@ -10,6 +10,13 @@
 #'
 #' @inherit targets::tar_target return
 #'
+#' @examples
+#' tar_target_archive(
+#'   model,
+#'   package = "tarchives",
+#'   pipeline = "example-model"
+#' )
+#'
 #' @export
 tar_target_archive <- function(
   name,

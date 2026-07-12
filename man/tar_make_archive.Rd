@@ -168,3 +168,12 @@ the value is invisibly returned.
 \description{
 Run an archived pipeline of targets
 }
+\examples{
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_make_archive(package = "tarchives", pipeline = "example-model")
+)
+}
+
+}

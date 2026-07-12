@@ -18,6 +18,9 @@
 #'
 #' @seealso [tar_manifest_archive()] to list the targets within a pipeline.
 #'
+#' @examples
+#' tar_archive_pipelines(package = "tarchives")
+#'
 #' @export
 tar_archive_pipelines <- function(
   package,

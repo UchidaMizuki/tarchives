@@ -62,3 +62,16 @@ Nothing.
 tarchives version of \code{\link[targets:tar_load]{targets::tar_load()}}. Reads one or more targets from
 an archived pipeline's store and assigns them into an environment.
 }
+\examples{
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_load_archive(model, package = "tarchives", pipeline = "example-model")
+    model
+  }
+)
+}
+
+}

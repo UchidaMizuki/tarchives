@@ -11,6 +11,14 @@
 #'
 #' @seealso [tar_archive_pipelines()] to list the pipelines in a package.
 #'
+#' @examples
+#' \donttest{
+#' withr::with_envvar(
+#'   c(R_USER_CACHE_DIR = tempfile()),
+#'   tar_manifest_archive(package = "tarchives", pipeline = "example-model")
+#' )
+#' }
+#'
 #' @export
 tar_manifest_archive <- function(
   package,

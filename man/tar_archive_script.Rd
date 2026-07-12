@@ -37,3 +37,7 @@ A scalar character of the path to the archived target script file.
 \description{
 Path to the archived target script file
 }
+\examples{
+tar_archive_script(package = "tarchives", pipeline = "example-model")
+
+}

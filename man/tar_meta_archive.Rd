@@ -101,3 +101,15 @@ A data frame with one row per target/object and the selected fields.
 tarchives version of \code{\link[targets:tar_meta]{targets::tar_meta()}}. Returns the metadata of an
 archived pipeline's store.
 }
+\examples{
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_meta_archive(package = "tarchives", pipeline = "example-model")
+  }
+)
+}
+
+}

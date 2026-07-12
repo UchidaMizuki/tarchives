@@ -6,6 +6,11 @@
 #'
 #' @return No return value, called for side effects.
 #'
+#' @examples
+#' withr::with_tempdir(
+#'   use_tarchives()
+#' )
+#'
 #' @export
 use_tarchives <- function(store = targets::tar_config_get("store")) {
   check_string(store, allow_empty = FALSE)

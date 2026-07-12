@@ -62,3 +62,18 @@ A function.
 \description{
 Function factory for archived targets
 }
+\examples{
+tar_outdated_archive <- tar_archive(
+  targets::tar_outdated,
+  package = "tarchives",
+  pipeline = "example-model"
+)
+
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_outdated_archive()
+)
+}
+
+}

@@ -8,6 +8,14 @@
 #'
 #' @inherit targets::tar_make return
 #'
+#' @examples
+#' \donttest{
+#' withr::with_envvar(
+#'   c(R_USER_CACHE_DIR = tempfile()),
+#'   tar_make_archive(package = "tarchives", pipeline = "example-model")
+#' )
+#' }
+#'
 #' @export
 tar_make_archive <- function(
   package,

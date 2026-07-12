@@ -39,6 +39,10 @@ Returns the names of the pipelines bundled in a package's
 available before running them with \code{\link[=tar_make_archive]{tar_make_archive()}} or inspecting their
 targets with \code{\link[=tar_manifest_archive]{tar_manifest_archive()}}.
 }
+\examples{
+tar_archive_pipelines(package = "tarchives")
+
+}
 \seealso{
 \code{\link[=tar_manifest_archive]{tar_manifest_archive()}} to list the targets within a pipeline.
 }

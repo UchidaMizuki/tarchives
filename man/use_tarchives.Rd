@@ -22,3 +22,9 @@ No return value, called for side effects.
 \description{
 Set up tarchives for an existing package.
 }
+\examples{
+withr::with_tempdir(
+  use_tarchives()
+)
+
+}

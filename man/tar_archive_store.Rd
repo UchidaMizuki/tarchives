@@ -27,3 +27,7 @@ directory.
 \description{
 Path to the archived target store directory
 }
+\examples{
+tar_archive_store(package = "tarchives", pipeline = "example-model")
+
+}

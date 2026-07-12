@@ -9,6 +9,18 @@
 #'
 #' @inherit targets::tar_load return
 #'
+#' @examples
+#' \donttest{
+#' withr::with_envvar(
+#'   c(R_USER_CACHE_DIR = tempfile()),
+#'   {
+#'     tar_make_archive(package = "tarchives", pipeline = "example-model")
+#'     tar_load_archive(model, package = "tarchives", pipeline = "example-model")
+#'     model
+#'   }
+#' )
+#' }
+#'
 #' @export
 tar_load_archive <- function(
   names,

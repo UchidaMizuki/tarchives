@@ -116,6 +116,15 @@ without any influence from parallel computing or priorities).
 tarchives version of \code{\link[targets:tar_manifest]{targets::tar_manifest()}}. Returns a data frame of the
 targets defined in an archived pipeline's target script file.
 }
+\examples{
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_manifest_archive(package = "tarchives", pipeline = "example-model")
+)
+}
+
+}
 \seealso{
 \code{\link[=tar_archive_pipelines]{tar_archive_pipelines()}} to list the pipelines in a package.
 }

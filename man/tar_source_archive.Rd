@@ -32,3 +32,7 @@ before running it.}
 \description{
 Run archived R scripts
 }
+\examples{
+tar_source_archive(package = "tarchives")
+
+}

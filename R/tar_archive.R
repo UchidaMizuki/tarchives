@@ -65,6 +65,9 @@ archive_system_file <- function(..., package, envir, call = caller_env()) {
 #'
 #' @return A scalar character of the path to the archived target script file.
 #'
+#' @examples
+#' tar_archive_script(package = "tarchives", pipeline = "example-model")
+#'
 #' @export
 tar_archive_script <- function(
   package,
@@ -90,6 +93,9 @@ tar_archive_script <- function(
 #'
 #' @return A scalar character of the path to the archived target store
 #' directory.
+#'
+#' @examples
+#' tar_archive_store(package = "tarchives", pipeline = "example-model")
 #'
 #' @export
 tar_archive_store <- function(
@@ -139,6 +145,20 @@ check_archive_store_exists <- function(
 #' @inheritParams targets::tar_make
 #'
 #' @return A function.
+#'
+#' @examples
+#' tar_outdated_archive <- tar_archive(
+#'   targets::tar_outdated,
+#'   package = "tarchives",
+#'   pipeline = "example-model"
+#' )
+#'
+#' \donttest{
+#' withr::with_envvar(
+#'   c(R_USER_CACHE_DIR = tempfile()),
+#'   tar_outdated_archive()
+#' )
+#' }
 #'
 #' @export
 tar_archive <- function(

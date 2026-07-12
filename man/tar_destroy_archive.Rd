@@ -23,7 +23,7 @@ tar_destroy_archive(
 \itemize{
 \item \code{"all"}: entire data store (default: \verb{_targets/})
 including cloud data, as well as download/upload scratch files.
-\item \code{"cloud"}: cloud data, including metadata, target definition object data
+\item \code{"cloud"}: cloud data, including metadata, target object data
 from targets with \code{tar_target(..., repository = "aws")},
 and workspace files saved on the cloud.
 Also deletes temporary staging files in
@@ -57,7 +57,7 @@ data store.
 }}
 
 \item{batch_size}{Positive integer between 1 and 1000,
-number of target definition objects to delete
+number of target objects to delete
 from the cloud with each HTTP API request.
 Currently only supported for AWS.
 Cannot be more than 1000.}
@@ -88,4 +88,16 @@ for a project.}
 tarchives version of \code{\link[targets:tar_destroy]{targets::tar_destroy()}}. Removes the cached \code{targets}
 store of an archived pipeline from the R user cache directory
 (\code{tools::R_user_dir("tarchives", "cache")}).
+}
+\examples{
+\donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_destroy_archive(package = "tarchives", pipeline = "example-model", ask = FALSE)
+  }
+)
+}
+
 }
