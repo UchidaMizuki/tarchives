@@ -105,11 +105,6 @@ tar_make_archive(
 )
 ```
 
-``` R
-#> Warning message:
-#> package 'targets' was built under R version 4.4.2 
-```
-
 Then you can read the results using the
 [`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
 function:

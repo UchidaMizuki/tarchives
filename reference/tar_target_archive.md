@@ -261,8 +261,8 @@ tar_target_archive_raw(
     branch over. For example: if your pipeline has
     `tar_target(name = y, command = x, pattern = map(x))`, then
     `tar_target(name = x, command = f(), memory = "auto")` will use
-    persistent memory in order to avoid rereading all of `x` for every
-    branch of `y`.
+    persistent memory for `x` in order to avoid rereading all of `x` for
+    every branch of `y`.
 
   - `"transient"`: the target gets unloaded after every new target
     completes. Either way, the target gets automatically loaded into
@@ -387,9 +387,9 @@ tar_target_archive_raw(
 
 ## Value
 
-A target object. Users should not modify these directly, just feed them
-to [`list()`](https://rdrr.io/r/base/list.html) in your target script
-file (default: `_targets.R`).
+A target definition object. Users should not modify these directly, just
+feed them to [`list()`](https://rdrr.io/r/base/list.html) in your target
+script file (default: `_targets.R`).
 
 ## Details
 

@@ -19,3 +19,8 @@ Useful links:
 
 **Maintainer**: Mizuki Uchida <uchidamizuki@vivaldi.net>
 ([ORCID](https://orcid.org/0009-0003-6534-6942)) \[copyright holder\]
+
+Authors:
+
+- Mizuki Uchida <uchidamizuki@vivaldi.net>
+  ([ORCID](https://orcid.org/0009-0003-6534-6942)) \[copyright holder\]

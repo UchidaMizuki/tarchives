@@ -117,27 +117,25 @@
 <span>  package <span class="op">=</span> <span class="st">"your-package"</span>,</span>
 <span>  pipeline <span class="op">=</span> <span class="st">"example-model"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; Warning message:</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; package 'targets' was built under R version 4.4.2 </span></span></code></pre></div>
 <p>Then you can read the results using the <code><a href="reference/tar_read_archive.html">tar_read_archive()</a></code> function:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/tar_read_archive.html">tar_read_archive</a></span><span class="op">(</span></span>
 <span>  <span class="va">model</span>,</span>
 <span>  package <span class="op">=</span> <span class="st">"your-package"</span>,</span>
 <span>  pipeline <span class="op">=</span> <span class="st">"example-model"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; lm(formula = Sepal.Width ~ Sepal.Length, data = data)</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt;  (Intercept)  Sepal.Length  </span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt;        1.131         0.278</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; lm(formula = Sepal.Width ~ Sepal.Length, data = data)</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;  (Intercept)  Sepal.Length  </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;        1.131         0.278</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="declare-a-target-from-another-pipeline">Declare a target from another pipeline<a class="anchor" aria-label="anchor" href="#declare-a-target-from-another-pipeline"></a>
 </h3>
 <p>You can also declare a target from another pipeline using the <code><a href="reference/tar_target_archive.html">tar_target_archive()</a></code> function. For example, if you want to declare the <code>data</code> and <code>model</code> targets from the <code>example-model</code> pipeline in your <code>_targets.R</code> file, you can do it as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/" class="external-link">targets</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html" class="external-link">tar_source</a></span><span class="op">(</span><span class="op">)</span></span>
