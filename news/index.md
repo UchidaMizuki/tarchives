@@ -2,6 +2,8 @@
 
 ## tarchives 0.2.0
 
+CRAN release: 2026-07-12
+
 - The archive functions now validate their `package` and `pipeline`
   arguments and report a clear error when the package or pipeline cannot
   be found.

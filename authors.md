@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/UchidaMizuki/tarchives/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/UchidaMizuki/tarchives/blob/v0.2.0/DESCRIPTION)
 
 Uchida M (2026). *tarchives: Make Your 'targets' Pipelines into a
 Package*. R package version 0.2.0,
