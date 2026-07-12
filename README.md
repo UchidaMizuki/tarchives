@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # tarchives
 
@@ -100,9 +101,6 @@ tar_make_archive(
   pipeline = "example-model"
 )
 ```
-
-    #> Warning message:
-    #> package 'targets' was built under R version 4.4.2 
 
 Then you can read the results using the `tar_read_archive()` function:
 

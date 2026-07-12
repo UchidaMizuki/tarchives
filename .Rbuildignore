@@ -3,7 +3,6 @@
 \.Rproj\.user
 \.Rhistory$
 ^LICENSE\.md$
-^README\.Rmd$
 ^inst/tarchives/.*/_targets$
 ^[\.]?air\.toml$
 ^\.vscode$
@@ -13,3 +12,4 @@
 ^\.claude$
 ^_pkgdown\.yml$
 ^docs$
+^README\.qmd$

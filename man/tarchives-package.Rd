@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID}) [copyright holder]
 
+Authors:
+\itemize{
+  \item Mizuki Uchida \email{uchidamizuki@vivaldi.net} (\href{https://orcid.org/0009-0003-6534-6942}{ORCID}) [copyright holder]
+}
+
 }
 \keyword{internal}

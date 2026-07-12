@@ -1,10 +1,13 @@
 ---
-output: github_document
+format:
+  gfm:
+    default-image-extension: ""
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -26,7 +29,7 @@ knitr::opts_chunk$set(
 ## Overview
 
 The goal of tarchives is to make targets pipelines into a package.
-It runs targets pipeline in /inst/tarchives and stores the results in the R user directory. 
+It runs targets pipeline in /inst/tarchives and stores the results in the R user directory.
 This means that the user does not have to run the process repeatedly, and the developer has the flexibility to update the data as versions are updated.
 
 This package is a wrapper for the targets package and contains the following functions:
@@ -137,7 +140,7 @@ tar_read_archive(
 
 ### Declare a target from another pipeline
 
-You can also declare a target from another pipeline using the `tar_target_archive()` function. 
+You can also declare a target from another pipeline using the `tar_target_archive()` function.
 For example, if you want to declare the `data` and `model` targets from the `example-model` pipeline in your `_targets.R` file, you can do it as follows:
 
 ```{r}
