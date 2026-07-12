@@ -1,6 +1,6 @@
 # Changelog
 
-## tarchives 0.1.2
+## tarchives 0.2.0
 
 - The archive functions now validate their `package` and `pipeline`
   arguments and report a clear error when the package or pipeline cannot

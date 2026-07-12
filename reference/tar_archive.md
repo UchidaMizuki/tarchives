@@ -77,3 +77,21 @@ tar_archive(
 ## Value
 
 A function.
+
+## Examples
+
+``` r
+tar_outdated_archive <- tar_archive(
+  targets::tar_outdated,
+  package = "tarchives",
+  pipeline = "example-model"
+)
+
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_outdated_archive()
+)
+#> [1] "data"  "model"
+# }
+```

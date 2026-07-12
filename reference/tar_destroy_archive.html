@@ -11,7 +11,7 @@ store of an archived pipeline from the R user cache directory
 
     <a class="navbar-brand me-2" href="../index.html">tarchives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ store of an archived pipeline from the R user cache directory
 <dt id="arg-destroy">destroy<a class="anchor" aria-label="anchor" href="#arg-destroy"></a></dt>
 <dd><p>Character of length 1, what to destroy. Choices:</p><ul><li><p><code>"all"</code>: entire data store (default: <code>_targets/</code>)
 including cloud data, as well as download/upload scratch files.</p></li>
-<li><p><code>"cloud"</code>: cloud data, including metadata, target definition object data
+<li><p><code>"cloud"</code>: cloud data, including metadata, target object data
 from targets with <code>tar_target(..., repository = "aws")</code>,
 and workspace files saved on the cloud.
 Also deletes temporary staging files in
@@ -107,7 +107,7 @@ data store.</p></li>
 
 <dt id="arg-batch-size">batch_size<a class="anchor" aria-label="anchor" href="#arg-batch-size"></a></dt>
 <dd><p>Positive integer between 1 and 1000,
-number of target definition objects to delete
+number of target objects to delete
 from the cloud with each HTTP API request.
 Currently only supported for AWS.
 Cannot be more than 1000.</p></dd>
@@ -143,6 +143,20 @@ for a project.</p></dd>
     <p><code>NULL</code> (invisibly).</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_envvar.html" class="external-link">with_envvar</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>R_USER_CACHE_DIR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="tar_make_archive.html">tar_make_archive</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"tarchives"</span>, pipeline <span class="op">=</span> <span class="st">"example-model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu">tar_destroy_archive</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"tarchives"</span>, pipeline <span class="op">=</span> <span class="st">"example-model"</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -152,7 +166,7 @@ for a project.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

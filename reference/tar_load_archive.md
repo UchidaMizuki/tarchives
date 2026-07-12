@@ -85,3 +85,26 @@ tar_load_archive(
 ## Value
 
 Nothing.
+
+## Examples
+
+``` r
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_load_archive(model, package = "tarchives", pipeline = "example-model")
+    model
+  }
+)
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ Sepal.Length, data = data)
+#> 
+#> Coefficients:
+#>  (Intercept)  Sepal.Length  
+#>        1.131         0.278  
+#> 
+# }
+```

@@ -81,3 +81,25 @@ paths to the custom files and directories if `format = "file"` was set.
 
 `tar_read_archive()` captures `name` with non-standard evaluation,
 whereas `tar_read_archive_raw()` takes it as a character string.
+
+## Examples
+
+``` r
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_read_archive(model, package = "tarchives", pipeline = "example-model")
+  }
+)
+#> 
+#> Call:
+#> lm(formula = Sepal.Width ~ Sepal.Length, data = data)
+#> 
+#> Coefficients:
+#>  (Intercept)  Sepal.Length  
+#>        1.131         0.278  
+#> 
+# }
+```

@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2024
-    COPYRIGHT HOLDER: tarchives authors
+    COPYRIGHT HOLDER: Mizuki Uchida

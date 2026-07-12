@@ -25,3 +25,12 @@ use_tarchives(store = targets::tar_config_get("store"))
 ## Value
 
 No return value, called for side effects.
+
+## Examples
+
+``` r
+withr::with_tempdir(
+  use_tarchives()
+)
+#> Adding '^inst/tarchives/.*/_targets$' to '.Rbuildignore'
+```

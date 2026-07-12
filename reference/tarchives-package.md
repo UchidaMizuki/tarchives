@@ -1,9 +1,9 @@
 # tarchives: Make Your 'targets' Pipelines into a Package
 
-Runs 'targets' pipeline in '/inst/tarchives' and stores the results in
-the R user directory. This means that the user does not have to run the
-process repeatedly, and the developer has the flexibility to update the
-data as versions are updated.
+Runs 'targets' pipelines bundled inside a package and caches the results
+in the R user cache directory, so that users of the package do not need
+to rerun the pipeline themselves. Package authors can update the cached
+results at any time by releasing a new package version.
 
 ## See also
 
@@ -18,9 +18,4 @@ Useful links:
 ## Author
 
 **Maintainer**: Mizuki Uchida <uchidamizuki@vivaldi.net>
-([ORCID](https://orcid.org/0009-0003-6534-6942))
-
-Authors:
-
-- Mizuki Uchida <uchidamizuki@vivaldi.net>
-  ([ORCID](https://orcid.org/0009-0003-6534-6942))
+([ORCID](https://orcid.org/0009-0003-6534-6942)) \[copyright holder\]

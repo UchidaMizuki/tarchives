@@ -200,3 +200,14 @@ tar_make_archive(
 `NULL` except if `callr_function = callr::r_bg()`, in which case a
 handle to the `callr` background process is returned. Either way, the
 value is invisibly returned.
+
+## Examples
+
+``` r
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_make_archive(package = "tarchives", pipeline = "example-model")
+)
+# }
+```

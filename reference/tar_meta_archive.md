@@ -137,3 +137,25 @@ tar_meta_archive(
 ## Value
 
 A data frame with one row per target/object and the selected fields.
+
+## Examples
+
+``` r
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  {
+    tar_make_archive(package = "tarchives", pipeline = "example-model")
+    tar_meta_archive(package = "tarchives", pipeline = "example-model")
+  }
+)
+#> # A tibble: 3 × 18
+#>   name  type  data  command depend    seed path  time                size  bytes
+#>   <chr> <chr> <chr> <chr>   <chr>    <int> <lis> <dttm>              <chr> <dbl>
+#> 1 drop… func… 3bda… NA      NA     NA      <chr> NA                  NA       NA
+#> 2 data  stem  3d7f… ccd552… 3c845…  3.36e7 <chr> 2026-07-12 05:39:07 s106…  1066
+#> 3 model stem  dfb7… c7c922… 02def…  8.09e8 <chr> 2026-07-12 05:39:07 s399…  3991
+#> # ℹ 8 more variables: format <chr>, repository <chr>, iteration <chr>,
+#> #   parent <chr>, children <list>, seconds <dbl>, warnings <chr>, error <chr>
+# }
+```

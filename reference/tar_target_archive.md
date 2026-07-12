@@ -261,8 +261,8 @@ tar_target_archive_raw(
     branch over. For example: if your pipeline has
     `tar_target(name = y, command = x, pattern = map(x))`, then
     `tar_target(name = x, command = f(), memory = "auto")` will use
-    persistent memory for `x` in order to avoid rereading all of `x` for
-    every branch of `y`.
+    persistent memory in order to avoid rereading all of `x` for every
+    branch of `y`.
 
   - `"transient"`: the target gets unloaded after every new target
     completes. Either way, the target gets automatically loaded into
@@ -387,9 +387,9 @@ tar_target_archive_raw(
 
 ## Value
 
-A target definition object. Users should not modify these directly, just
-feed them to [`list()`](https://rdrr.io/r/base/list.html) in your target
-script file (default: `_targets.R`).
+A target object. Users should not modify these directly, just feed them
+to [`list()`](https://rdrr.io/r/base/list.html) in your target script
+file (default: `_targets.R`).
 
 ## Details
 
@@ -406,3 +406,54 @@ does not trigger a build. The target tracks the installed version of
 `package`, so it reruns and refreshes the data when a new version of the
 package providing the archive is installed, and is skipped otherwise.
 Downstream targets still only rebuild when the value actually changes.
+
+## Examples
+
+``` r
+tar_target_archive(
+  model,
+  package = "tarchives",
+  pipeline = "example-model"
+)
+#> <tar_stem> 
+#>   name: model 
+#>   description:  
+#>   command:
+#>     {
+#>         tarchives::tar_make_archive(package = "tarchives", pipeline = "example-model", 
+#>             names = "model")
+#>         tarchives::tar_read_archive_raw(name = "model", package = "tarchives", 
+#>             pipeline = "example-model")
+#>     }0.2.0 
+#>   format: rds 
+#>   repository: local 
+#>   iteration method: vector 
+#>   error mode: stop 
+#>   memory mode: auto 
+#>   storage mode: worker 
+#>   retrieval mode: auto 
+#>   deployment mode: worker 
+#>   priority: 0 
+#>   resources:
+#>     list() 
+#>   cue:
+#>     seed: TRUE
+#>     file: TRUE
+#>     iteration: TRUE
+#>     repository: TRUE
+#>     format: TRUE
+#>     depend: TRUE
+#>     command: TRUE
+#>     mode: thorough 
+#>   packages:
+#>     tarchives
+#>     stats
+#>     graphics
+#>     grDevices
+#>     utils
+#>     datasets
+#>     methods
+#>     base 
+#>   library:
+#>     NULL
+```

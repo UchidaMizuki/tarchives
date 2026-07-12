@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tarchives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -270,8 +270,7 @@ for non-dynamically-branched targets that other targets
 dynamically branch over. For example: if your pipeline has
 <code>tar_target(name = y, command = x, pattern = map(x))</code>,
 then <code>tar_target(name = x, command = f(), memory = "auto")</code>
-will use persistent memory for <code>x</code>
-in order to avoid rereading all of <code>x</code>
+will use persistent memory in order to avoid rereading all of <code>x</code>
 for every branch of <code>y</code>.</p></li>
 <li><p><code>"transient"</code>: the target gets unloaded
 after every new target completes.
@@ -386,7 +385,7 @@ string <code>"survival model"</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A target definition object. Users should not modify these directly,
+    <p>A target object. Users should not modify these directly,
 just feed them to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> in your target script file
 (default: <code>_targets.R</code>).</p>
     </div>
@@ -404,6 +403,57 @@ archive is installed, and is skipped otherwise. Downstream targets still
 only rebuild when the value actually changes.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">tar_target_archive</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span>,</span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"tarchives"</span>,</span></span>
+<span class="r-in"><span>  pipeline <span class="op">=</span> <span class="st">"example-model"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tar_stem&gt; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name: model </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   description:  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   command:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         tarchives::tar_make_archive(package = "tarchives", pipeline = "example-model", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             names = "model")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         tarchives::tar_read_archive_raw(name = "model", package = "tarchives", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             pipeline = "example-model")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }0.2.0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   format: rds </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   repository: local </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   iteration method: vector </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   error mode: stop </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   memory mode: auto </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   storage mode: worker </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   retrieval mode: auto </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   deployment mode: worker </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   priority: 0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   resources:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     list() </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cue:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     seed: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     file: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     iteration: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     repository: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     format: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     depend: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     command: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mode: thorough </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   packages:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     tarchives</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     stats</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     graphics</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     grDevices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     utils</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     datasets</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     methods</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     base </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   library:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     NULL</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -413,7 +463,7 @@ only rebuild when the value actually changes.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

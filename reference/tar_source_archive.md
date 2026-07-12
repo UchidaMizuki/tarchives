@@ -38,3 +38,9 @@ tar_source_archive(
 ## Value
 
 `NULL` (invisibly)
+
+## Examples
+
+``` r
+tar_source_archive(package = "tarchives")
+```

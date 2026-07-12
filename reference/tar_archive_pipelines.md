@@ -55,3 +55,10 @@ shared `R/` helper directory is not included.
 
 [`tar_manifest_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_manifest_archive.md)
 to list the targets within a pipeline.
+
+## Examples
+
+``` r
+tar_archive_pipelines(package = "tarchives")
+#> [1] "example-model" "example-plot" 
+```

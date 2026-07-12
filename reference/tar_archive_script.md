@@ -48,3 +48,10 @@ tar_archive_script(
 ## Value
 
 A scalar character of the path to the archived target script file.
+
+## Examples
+
+``` r
+tar_archive_script(package = "tarchives", pipeline = "example-model")
+#> /home/runner/work/_temp/Library/tarchives/tarchives/example-model/_targets.R
+```

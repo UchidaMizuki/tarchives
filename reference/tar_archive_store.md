@@ -33,3 +33,10 @@ tar_archive_store(package, pipeline, store = targets::tar_config_get("store"))
 ## Value
 
 A scalar character of the path to the archived target store directory.
+
+## Examples
+
+``` r
+tar_archive_store(package = "tarchives", pipeline = "example-model")
+#> /home/runner/.cache/R/tarchives/tarchives/example-model/_targets
+```

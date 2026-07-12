@@ -179,3 +179,22 @@ influence from parallel computing or priorities).
 
 [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)
 to list the pipelines in a package.
+
+## Examples
+
+``` r
+# \donttest{
+withr::with_envvar(
+  c(R_USER_CACHE_DIR = tempfile()),
+  tar_manifest_archive(package = "tarchives", pipeline = "example-model")
+)
+#> # A tibble: 2 × 19
+#>   name  command       format repository iteration error memory storage retrieval
+#>   <chr> <chr>         <chr>  <chr>      <chr>     <chr> <chr>  <chr>   <chr>    
+#> 1 data  drop_setosa(… rds    local      vector    stop  auto   worker  auto     
+#> 2 model lm(Sepal.Wid… rds    local      vector    stop  auto   worker  auto     
+#> # ℹ 10 more variables: deployment <chr>, priority <dbl>, cue_mode <chr>,
+#> #   cue_command <lgl>, cue_depend <lgl>, cue_file <lgl>, cue_format <lgl>,
+#> #   cue_repository <lgl>, cue_iteration <lgl>, packages <list>
+# }
+```
