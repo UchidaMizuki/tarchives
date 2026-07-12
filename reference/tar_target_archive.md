@@ -424,7 +424,7 @@ tar_target_archive(
 #>             names = "model")
 #>         tarchives::tar_read_archive_raw(name = "model", package = "tarchives", 
 #>             pipeline = "example-model")
-#>     }0.2.0 
+#>     }0.2.0.9000 
 #>   format: rds 
 #>   repository: local 
 #>   iteration method: vector 
