@@ -1,5 +1,7 @@
 # tarchives (development version)
 
+* `tar_check_archive_pipeline()` and `tar_check_archive_name()` validate a pipeline or target name against the ones available in a package, erroring with a "did you mean" suggestion when the value doesn't match.
+
 # tarchives 0.2.0
 
 * The archive functions now validate their `package` and `pipeline` arguments and report a clear error when the package or pipeline cannot be found.

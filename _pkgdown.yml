@@ -23,6 +23,7 @@ reference:
   - tar_manifest_archive
   - tar_meta_archive
   - tar_destroy_archive
+  - tar_check_archive_pipeline
 - title: Lower-level helpers
   desc: Locate archive scripts and stores, or wrap targets functions directly.
   contents:
