@@ -194,6 +194,9 @@ Discover and inspect archived pipelines and clear their cached stores.
   : Read metadata from archive storage
 - [`tar_destroy_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_destroy_archive.md)
   : Destroy an archived pipeline's storage
+- [`tar_check_archive_pipeline()`](https://uchidamizuki.github.io/tarchives/reference/tar_check_archive_pipeline.md)
+  [`tar_check_archive_name()`](https://uchidamizuki.github.io/tarchives/reference/tar_check_archive_pipeline.md)
+  : Check a pipeline or target name
 
 ## Lower-level helpers
 

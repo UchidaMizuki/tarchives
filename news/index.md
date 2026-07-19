@@ -2,6 +2,13 @@
 
 ## tarchives (development version)
 
+- [`tar_check_archive_pipeline()`](https://uchidamizuki.github.io/tarchives/reference/tar_check_archive_pipeline.md)
+  and
+  [`tar_check_archive_name()`](https://uchidamizuki.github.io/tarchives/reference/tar_check_archive_pipeline.md)
+  validate a pipeline or target name against the ones available in a
+  package, erroring with a “did you mean” suggestion when the value
+  doesn’t match.
+
 ## tarchives 0.2.0
 
 CRAN release: 2026-07-12
