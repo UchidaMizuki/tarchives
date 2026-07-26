@@ -38,11 +38,13 @@ tar_destroy_archive <- function(
     pipeline = pipeline,
     store = store
   )
-  targets::tar_destroy(
+  out <- targets::tar_destroy(
     destroy = destroy,
     batch_size = batch_size,
     verbose = verbose,
     ask = ask,
     store = store
   )
+  archive_forget_built(package = package, pipeline = pipeline)
+  out
 }

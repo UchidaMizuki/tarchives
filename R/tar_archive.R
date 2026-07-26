@@ -1,3 +1,42 @@
+# Session-only cache of which target names have been confirmed built for the
+# installed version of a given package/pipeline, so `tar_get_archive()` only
+# pays the `tar_make_archive()` startup cost once per name per installed
+# version instead of on every get. Cleared by `tar_destroy_archive()` so a
+# destroyed store is rebuilt on the next get even when the version hasn't
+# changed.
+#
+# Keyed by `package` at the top level (an environment), then by `pipeline`
+# and `name` (nested list lookups) -- rather than concatenating them into a
+# single string key -- so two different pipeline or target names can never
+# collide onto the same entry. The leaf value is the package version
+# confirmed built for that name, so a version bump invalidates each name
+# independently without any extra bookkeeping.
+archive_build_cache <- rlang::new_environment()
+
+archive_built <- function(package, pipeline, name) {
+  pipelines <- rlang::env_get(archive_build_cache, package, default = list())
+  identical(
+    pipelines[[pipeline]][[name]],
+    as.character(utils::packageVersion(package))
+  )
+}
+
+archive_mark_built <- function(package, pipeline, name) {
+  pipelines <- rlang::env_get(archive_build_cache, package, default = list())
+  pipelines[[pipeline]][[name]] <- as.character(utils::packageVersion(package))
+  rlang::env_poke(archive_build_cache, package, pipelines)
+}
+
+archive_forget_built <- function(package, pipeline) {
+  pipelines <- rlang::env_get(archive_build_cache, package, default = list())
+  pipelines[[pipeline]] <- NULL
+  if (length(pipelines)) {
+    rlang::env_poke(archive_build_cache, package, pipelines)
+  } else {
+    rlang::env_unbind(archive_build_cache, package)
+  }
+}
+
 with_dir_archive <- function(
   package,
   pipeline,

@@ -13,6 +13,7 @@ reference:
   contents:
   - tar_make_archive
   - tar_read_archive
+  - tar_get_archive
   - tar_load_archive
   - tar_source_archive
   - tar_target_archive
