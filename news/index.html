@@ -36,6 +36,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="tarchives-development-version">tarchives (development version)<a class="anchor" aria-label="anchor" href="#tarchives-development-version"></a></h2>
 <ul><li>
 <code><a href="../reference/tar_check_archive_pipeline.html">tar_check_archive_pipeline()</a></code> and <code><a href="../reference/tar_check_archive_pipeline.html">tar_check_archive_name()</a></code> validate a pipeline or target name against the ones available in a package, erroring with a “did you mean” suggestion when the value doesn’t match.</li>
+<li>
+<code><a href="../reference/tar_get_archive.html">tar_get_archive()</a></code> (experimental) builds an archived pipeline (if outdated) and reads a target’s value in one call, skipping the build on repeat calls for the same installed package version within a session.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="tarchives-020">tarchives 0.2.0<a class="anchor" aria-label="anchor" href="#tarchives-020"></a></h2><p class="text-muted">CRAN release: 2026-07-12</p>

@@ -8,6 +8,10 @@
   validate a pipeline or target name against the ones available in a
   package, erroring with a “did you mean” suggestion when the value
   doesn’t match.
+- [`tar_get_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_get_archive.md)
+  (experimental) builds an archived pipeline (if outdated) and reads a
+  target’s value in one call, skipping the build on repeat calls for the
+  same installed package version within a session.
 
 ## tarchives 0.2.0
 

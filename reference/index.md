@@ -16,6 +16,10 @@ tarchives versions of the main targets functions.
 - [`tar_read_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
   [`tar_read_archive_raw()`](https://uchidamizuki.github.io/tarchives/reference/tar_read_archive.md)
   : Read a target's value from archive storage
+- [`tar_get_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_get_archive.md)
+  [`tar_get_archive_raw()`](https://uchidamizuki.github.io/tarchives/reference/tar_get_archive.md)
+  **\[experimental\]** : Get a target's value from archive storage,
+  building first if needed
 - [`tar_load_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_load_archive.md)
   : Load a target's value from archive storage
 - [`tar_source_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_source_archive.md)

@@ -118,5 +118,6 @@ withr::with_envvar(
     tar_destroy_archive(package = "tarchives", pipeline = "example-model", ask = FALSE)
   }
 )
+#> NULL
 # }
 ```
