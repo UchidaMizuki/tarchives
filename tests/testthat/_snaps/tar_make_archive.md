@@ -37,3 +37,10 @@
         there is no package called 'tarchivesnotapackage'
         See https://books.ropensci.org/targets/debugging.html
 
+# local_archive_lock() waits for another process
+
+    Code
+      f()
+    Message
+      Waiting for another R process to finish building pipeline "pipe" of package pkg.
+
