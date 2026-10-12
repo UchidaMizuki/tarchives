@@ -36,3 +36,31 @@ test_that("tar_make_archive() validates its inputs", {
     )
   )
 })
+
+targets::tar_test("tar_make_archive() explains a missing package", {
+  withr::local_language("en")
+  dir <- withr::local_tempdir()
+  writeLines(
+    "library(targets); list(tar_target(x, tarchivesnotapackage::f()))",
+    file.path(dir, "_targets.R")
+  )
+  local_mocked_bindings(archive_system_file = function(...) dir)
+  expect_snapshot(
+    error = TRUE,
+    tar_make_archive(package = "tarchives", pipeline = "missing-package")
+  )
+})
+
+targets::tar_test("tar_make_archive() adds context to build errors", {
+  withr::local_language("en")
+  dir <- withr::local_tempdir()
+  writeLines(
+    "library(targets); list(tar_target(x, stop(\"Upstream is down.\")))",
+    file.path(dir, "_targets.R")
+  )
+  local_mocked_bindings(archive_system_file = function(...) dir)
+  expect_error(
+    tar_make_archive(package = "tarchives", pipeline = "failing"),
+    class = "tarchives_error_build"
+  )
+})

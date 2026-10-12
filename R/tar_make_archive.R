@@ -50,27 +50,66 @@ tar_make_archive <- function(
     pipeline = pipeline,
     store = store
   )
+  call <- current_env()
   with_dir_archive(
     package = package,
     pipeline = pipeline,
     envir = envir,
-    targets::tar_make(
-      names = {{ names }},
-      shortcut = shortcut,
-      reporter = reporter,
-      seconds_meta_append = seconds_meta_append,
-      seconds_meta_upload = seconds_meta_upload,
-      seconds_reporter = seconds_reporter,
-      seconds_interval = seconds_interval,
-      callr_function = callr_function,
-      callr_arguments = callr_arguments,
-      envir = envir,
-      script = script,
-      store = store,
-      garbage_collection = garbage_collection,
-      use_crew = use_crew,
-      terminate_controller = terminate_controller,
-      as_job = as_job
+    with_archive_build_error(
+      package = package,
+      pipeline = pipeline,
+      call = call,
+      targets::tar_make(
+        names = {{ names }},
+        shortcut = shortcut,
+        reporter = reporter,
+        seconds_meta_append = seconds_meta_append,
+        seconds_meta_upload = seconds_meta_upload,
+        seconds_reporter = seconds_reporter,
+        seconds_interval = seconds_interval,
+        callr_function = callr_function,
+        callr_arguments = callr_arguments,
+        envir = envir,
+        script = script,
+        store = store,
+        garbage_collection = garbage_collection,
+        use_crew = use_crew,
+        terminate_controller = terminate_controller,
+        as_job = as_job
+      )
     )
   )
+}
+
+# Rethrow a failed build with the package and pipeline that failed, since the
+# error usually reaches end users through a downstream package's function
+# rather than a direct `tar_make_archive()` call. When the cause is a missing
+# package, point at the usual reason: packages needed only to build a pipeline
+# are often in the providing package's `Suggests`, which aren't installed by
+# default.
+#
+# An exiting handler (rather than a calling one) so that errors `targets`
+# catches and handles internally are left alone.
+with_archive_build_error <- function(package, pipeline, call, code) {
+  tryCatch(code, error = function(cnd) {
+    info <- NULL
+    if (inherits(cnd, "packageNotFoundError")) {
+      info <- c(
+        i = "The pipeline needs a package that isn't installed.",
+        i = "Packages needed only to build a pipeline are often suggested \\
+        dependencies of {.pkg {package}}, which aren't installed by default. \\
+        To install them, run \\
+        {.run install.packages(\"{package}\", dependencies = TRUE)}."
+      )
+    }
+    cli::cli_abort(
+      c(
+        "Can't build pipeline {.val {pipeline}} of package {.pkg {package}}.",
+        info
+      ),
+      parent = cnd,
+      class = "tarchives_error_build",
+      call = call
+    )
+  })
 }

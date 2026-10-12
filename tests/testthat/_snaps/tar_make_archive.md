@@ -23,3 +23,17 @@
       Error in `tar_make_archive()`:
       ! `package` must be a single string, not the number 123.
 
+# tar_make_archive() explains a missing package
+
+    Code
+      tar_make_archive(package = "tarchives", pipeline = "missing-package")
+    Condition
+      Error in `tar_make_archive()`:
+      ! Can't build pipeline "missing-package" of package tarchives.
+      i The pipeline needs a package that isn't installed.
+      i Packages needed only to build a pipeline are often suggested dependencies of tarchives, which aren't installed by default. To install them, run `install.packages("tarchives", dependencies = TRUE)`.
+      Caused by error:
+      ! Error in tar_make():
+        there is no package called 'tarchivesnotapackage'
+        See https://books.ropensci.org/targets/debugging.html
+

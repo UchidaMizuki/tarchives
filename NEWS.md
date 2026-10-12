@@ -2,6 +2,7 @@
 
 * `tar_check_archive_pipeline()` and `tar_check_archive_name()` validate a pipeline or target name against the ones available in a package, erroring with a "did you mean" suggestion when the value doesn't match.
 * `tar_get_archive()` (experimental) builds an archived pipeline (if outdated) and reads a target's value in one call, skipping the build on repeat calls for the same installed package version within a session.
+* `tar_make_archive()` (and therefore `tar_get_archive()` and `tar_target_archive()`) now reports which package and pipeline failed to build, with the original error attached. When the build fails because a package isn't installed, it explains that packages needed only for building are often suggested dependencies and how to install them (#17).
 
 # tarchives 0.2.0
 
