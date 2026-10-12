@@ -12,6 +12,16 @@
   (experimental) builds an archived pipeline (if outdated) and reads a
   target’s value in one call, skipping the build on repeat calls for the
   same installed package version within a session.
+- [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md)
+  (and therefore
+  [`tar_get_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_get_archive.md)
+  and
+  [`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md))
+  now reports which package and pipeline failed to build, with the
+  original error attached. When the build fails because a package isn’t
+  installed, it explains that packages needed only for building are
+  often suggested dependencies and how to install them
+  ([\#17](https://github.com/UchidaMizuki/tarchives/issues/17)).
 
 ## tarchives 0.2.0
 

@@ -38,6 +38,8 @@
 <code><a href="../reference/tar_check_archive_pipeline.html">tar_check_archive_pipeline()</a></code> and <code><a href="../reference/tar_check_archive_pipeline.html">tar_check_archive_name()</a></code> validate a pipeline or target name against the ones available in a package, erroring with a “did you mean” suggestion when the value doesn’t match.</li>
 <li>
 <code><a href="../reference/tar_get_archive.html">tar_get_archive()</a></code> (experimental) builds an archived pipeline (if outdated) and reads a target’s value in one call, skipping the build on repeat calls for the same installed package version within a session.</li>
+<li>
+<code><a href="../reference/tar_make_archive.html">tar_make_archive()</a></code> (and therefore <code><a href="../reference/tar_get_archive.html">tar_get_archive()</a></code> and <code><a href="../reference/tar_target_archive.html">tar_target_archive()</a></code>) now reports which package and pipeline failed to build, with the original error attached. When the build fails because a package isn’t installed, it explains that packages needed only for building are often suggested dependencies and how to install them (<a href="https://github.com/UchidaMizuki/tarchives/issues/17" class="external-link">#17</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="tarchives-020">tarchives 0.2.0<a class="anchor" aria-label="anchor" href="#tarchives-020"></a></h2><p class="text-muted">CRAN release: 2026-07-12</p>

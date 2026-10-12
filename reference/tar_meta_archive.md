@@ -153,8 +153,8 @@ withr::with_envvar(
 #>   name  type  data  command depend    seed path  time                size  bytes
 #>   <chr> <chr> <chr> <chr>   <chr>    <int> <lis> <dttm>              <chr> <dbl>
 #> 1 drop… func… 3bda… NA      NA     NA      <chr> NA                  NA       NA
-#> 2 data  stem  3d7f… ccd552… 3c845…  3.36e7 <chr> 2026-07-26 01:46:27 s106…  1066
-#> 3 model stem  61f3… c7c922… 02def…  8.09e8 <chr> 2026-07-26 01:46:27 s397…  3975
+#> 2 data  stem  3d7f… ccd552… 3c845…  3.36e7 <chr> 2026-10-12 14:59:01 s106…  1066
+#> 3 model stem  dfb7… c7c922… 02def…  8.09e8 <chr> 2026-10-12 14:59:01 s399…  3991
 #> # ℹ 8 more variables: format <chr>, repository <chr>, iteration <chr>,
 #> #   parent <chr>, children <list>, seconds <dbl>, warnings <chr>, error <chr>
 # }
