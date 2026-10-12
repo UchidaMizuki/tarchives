@@ -47,7 +47,8 @@ targets::tar_test("tar_make_archive() explains a missing package", {
   local_mocked_bindings(archive_system_file = function(...) dir)
   expect_snapshot(
     error = TRUE,
-    tar_make_archive(package = "tarchives", pipeline = "missing-package")
+    tar_make_archive(package = "tarchives", pipeline = "missing-package"),
+    transform = \(x) gsub("[‘’]", "'", x)
   )
 })
 
