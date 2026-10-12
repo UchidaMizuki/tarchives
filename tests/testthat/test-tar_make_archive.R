@@ -65,3 +65,43 @@ targets::tar_test("tar_make_archive() adds context to build errors", {
     class = "tarchives_error_build"
   )
 })
+
+test_that("local_archive_lock() holds the lock until exit", {
+  store <- file.path(withr::local_tempdir(), "_targets")
+  locked_elsewhere <- function() {
+    callr::r(
+      \(path) is.null(filelock::lock(path, timeout = 0)),
+      args = list(path = paste0(store, ".lock"))
+    )
+  }
+  f <- function() {
+    local_archive_lock(store = store, package = "pkg", pipeline = "pipe")
+    locked_elsewhere()
+  }
+  expect_identical(f(), TRUE)
+  expect_identical(locked_elsewhere(), FALSE)
+})
+
+test_that("local_archive_lock() waits for another process", {
+  skip_on_cran()
+  store <- file.path(withr::local_tempdir(), "_targets")
+  path <- paste0(store, ".lock")
+  ready <- paste0(store, ".ready")
+  holder <- callr::r_bg(
+    function(path, ready) {
+      lock <- filelock::lock(path)
+      file.create(ready)
+      Sys.sleep(2)
+      filelock::unlock(lock)
+    },
+    args = list(path = path, ready = ready)
+  )
+  withr::defer(holder$kill())
+  while (!file.exists(ready)) {
+    Sys.sleep(0.05)
+  }
+  f <- function() {
+    local_archive_lock(store = store, package = "pkg", pipeline = "pipe")
+  }
+  expect_snapshot(f())
+})
