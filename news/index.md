@@ -22,6 +22,16 @@
   installed, it explains that packages needed only for building are
   often suggested dependencies and how to install them
   ([\#17](https://github.com/UchidaMizuki/tarchives/issues/17)).
+- [`tar_make_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_make_archive.md)
+  (and therefore
+  [`tar_get_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_get_archive.md)
+  and
+  [`tar_target_archive()`](https://uchidamizuki.github.io/tarchives/reference/tar_target_archive.md))
+  now locks the archived store while building, so R processes that
+  request the same archive at the same time (e.g. parallel workers)
+  build it one at a time instead of corrupting the store. tarchives now
+  imports filelock
+  ([\#16](https://github.com/UchidaMizuki/tarchives/issues/16)).
 
 ## tarchives 0.2.0
 
