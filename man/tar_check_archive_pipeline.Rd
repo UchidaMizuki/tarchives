@@ -47,6 +47,17 @@ pipeline (see \code{\link[=tar_manifest_archive]{tar_manifest_archive()}}). Erro
 suggestion when the value doesn't match, so callers don't have to
 reimplement this check themselves.
 }
+\details{
+\code{tar_check_archive_name()} reads the pipeline's target script in a \code{callr}
+subprocess, so anything the script does -- such as calling
+\code{\link[targets:tar_option_set]{targets::tar_option_set()}} or attaching packages -- can't affect the
+caller's R session. This makes it safe to call from a function used in a
+user's own target script. The target names are cached for the rest of the
+session per version of \code{package}, so only the first check of each pipeline
+pays the subprocess startup cost. Checks run by the target script itself
+(e.g. when one data package's pipeline uses another's targets) are skipped
+while its names are read, so the cost doesn't grow with the nesting depth.
+}
 \examples{
 tar_check_archive_pipeline("example-model", package = "tarchives")
 

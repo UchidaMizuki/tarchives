@@ -54,6 +54,18 @@ tar_check_archive_pipeline <- function(
 }
 
 #' @rdname tar_check_archive_pipeline
+#'
+#' @details
+#' `tar_check_archive_name()` reads the pipeline's target script in a `callr`
+#' subprocess, so anything the script does -- such as calling
+#' [targets::tar_option_set()] or attaching packages -- can't affect the
+#' caller's R session. This makes it safe to call from a function used in a
+#' user's own target script. The target names are cached for the rest of the
+#' session per version of `package`, so only the first check of each pipeline
+#' pays the subprocess startup cost. Checks run by the target script itself
+#' (e.g. when one data package's pipeline uses another's targets) are skipped
+#' while its names are read, so the cost doesn't grow with the nesting depth.
+#'
 #' @export
 tar_check_archive_name <- function(
   name,
@@ -63,16 +75,45 @@ tar_check_archive_name <- function(
   arg_nm = rlang::caller_arg(name),
   error_call = rlang::caller_env()
 ) {
-  names <- tar_manifest_archive(
+  # Inside the subprocess that reads another pipeline's target names, nested
+  # checks are skipped: only the names are needed there, and checking would
+  # start yet another subprocess per level of nesting.
+  if (identical(Sys.getenv("TARCHIVES_READING_NAMES"), "true")) {
+    return(name)
+  }
+  names <- archive_target_names(
     package = package,
     pipeline = pipeline,
-    envir = envir,
-    callr_function = NULL
-  )$name
+    envir = envir
+  )
   rlang::arg_match0(
     name,
     names,
     arg_nm = arg_nm,
     error_call = error_call
   )
+}
+
+# Session-only cache of the target names of each package/pipeline, keyed like
+# `archive_build_cache`, so only the first check of a pipeline pays the
+# subprocess startup cost of `tar_manifest_archive()`. The package version the
+# names were read for is stored with them, so a version bump invalidates them.
+archive_names_cache <- rlang::new_environment()
+
+archive_target_names <- function(package, pipeline, envir) {
+  version <- as.character(utils::packageVersion(package))
+  pipelines <- rlang::env_get(archive_names_cache, package, default = list())
+  if (!identical(pipelines[[pipeline]]$version, version)) {
+    names <- withr::with_envvar(
+      c(TARCHIVES_READING_NAMES = "true"),
+      tar_manifest_archive(
+        package = package,
+        pipeline = pipeline,
+        envir = envir
+      )$name
+    )
+    pipelines[[pipeline]] <- list(version = version, names = names)
+    rlang::env_poke(archive_names_cache, package, pipelines)
+  }
+  pipelines[[pipeline]]$names
 }
