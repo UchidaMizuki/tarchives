@@ -78,7 +78,7 @@ tar_check_archive_name <- function(
   # Inside the subprocess that reads another pipeline's target names, nested
   # checks are skipped: only the names are needed there, and checking would
   # start yet another subprocess per level of nesting.
-  if (nzchar(Sys.getenv("TARCHIVES_READING_NAMES"))) {
+  if (identical(Sys.getenv("TARCHIVES_READING_NAMES"), "true")) {
     return(name)
   }
   names <- archive_target_names(
