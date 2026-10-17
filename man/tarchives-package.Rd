@@ -12,7 +12,7 @@ Runs 'targets' pipelines bundled inside a package and caches the results in the 
 Useful links:
 \itemize{
   \item \url{https://github.com/UchidaMizuki/tarchives}
-  \item \url{https://uchidamizuki.github.io/tarchives/}
+  \item \url{https://uchidamizuki.com/tarchives/}
   \item Report bugs at \url{https://github.com/UchidaMizuki/tarchives/issues}
 }
 
