@@ -57,6 +57,19 @@ tar_check_archive_name(
 
 `pipeline` or `name`, invisibly, if valid. Otherwise, throws an error.
 
+## Details
+
+`tar_check_archive_name()` reads the pipeline's target script in a
+`callr` subprocess, so anything the script does – such as calling
+[`targets::tar_option_set()`](https://docs.ropensci.org/targets/reference/tar_option_set.html)
+or attaching packages – can't affect the caller's R session. This makes
+it safe to call from a function used in a user's own target script. The
+target names are cached for the rest of the session per version of
+`package`, so only the first check of each pipeline pays the subprocess
+startup cost. Checks run by the target script itself (e.g. when one data
+package's pipeline uses another's targets) are skipped while its names
+are read, so the cost doesn't grow with the nesting depth.
+
 ## See also
 
 [`tar_archive_pipelines()`](https://uchidamizuki.github.io/tarchives/reference/tar_archive_pipelines.md)

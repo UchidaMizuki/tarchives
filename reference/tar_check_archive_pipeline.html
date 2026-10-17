@@ -100,6 +100,18 @@ error to the correct argument and call.</p></dd>
 error.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>tar_check_archive_name()</code> reads the pipeline's target script in a <code>callr</code>
+subprocess, so anything the script does – such as calling
+<code><a href="https://docs.ropensci.org/targets/reference/tar_option_set.html" class="external-link">targets::tar_option_set()</a></code> or attaching packages – can't affect the
+caller's R session. This makes it safe to call from a function used in a
+user's own target script. The target names are cached for the rest of the
+session per version of <code>package</code>, so only the first check of each pipeline
+pays the subprocess startup cost. Checks run by the target script itself
+(e.g. when one data package's pipeline uses another's targets) are skipped
+while its names are read, so the cost doesn't grow with the nesting depth.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="tar_archive_pipelines.html">tar_archive_pipelines()</a></code> to list the pipelines in a package, and
 <code><a href="tar_manifest_archive.html">tar_manifest_archive()</a></code> to list the targets within a pipeline.</p></div>

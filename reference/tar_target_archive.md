@@ -446,7 +446,6 @@ tar_target_archive(
 #>     command: TRUE
 #>     mode: thorough 
 #>   packages:
-#>     targets
 #>     tarchives
 #>     stats
 #>     graphics
